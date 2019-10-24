@@ -7,11 +7,19 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CreatureTest {
 
+    private Creature centaur;
+    private Creature imp;
+
+    @BeforeEach
+    void init(){
+        centaur = new Creature("centaur",10,5,3);
+        imp = new Creature("imp", 5,2,2);
+    }
+
     @Test
     void attackedImpShouldLostThreeHp(){
         //given
-        Creature centaur = new Creature("centaur",10,5,3);
-        Creature imp = new Creature("imp", 5,2,2);
+
         //when
         centaur.attack(imp);
         //then
@@ -20,9 +28,6 @@ class CreatureTest {
 
     @Test
     void attackedCentaurShouldLost(){
-        Creature centaur = new Creature("centaur",10,5,3);
-        Creature imp = new Creature("imp", 5,2,2);
-
         imp.attack(centaur);
 
         assertEquals(9, centaur.getCurrentHp());
