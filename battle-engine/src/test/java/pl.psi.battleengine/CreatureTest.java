@@ -12,7 +12,12 @@ class CreatureTest {
 
     @BeforeEach
     void init(){
-        centaur = new Creature("centaur",10,5,3);
+        centaur = Creature.builder()
+                .aName("centaur")
+                .aMaxHp(10)
+                .aAttack(5)
+                .aDefence(3)
+                .build();
         imp = new Creature("imp", 5,2,2);
     }
 
@@ -38,5 +43,21 @@ class CreatureTest {
         imp.attack(centaur);
 
         assertEquals(2, imp.getCurrentHp());
+    }
+
+    @Test
+    void defenderShouldCounterAttackOnlyOnce(){
+        imp.attack(centaur);
+        imp.attack(centaur);
+
+        assertEquals(2, imp.getCurrentHp());
+    }
+
+    @Test
+    void shooterCouldNotBeCaunterAttacked(){
+        ShootingCreature shooter = new ShootingCreature("centaur",10,5,3);
+        shooter.attack(imp);
+
+        assertEquals(shooter.getMaxHp(), shooter.getCurrentHp());
     }
 }

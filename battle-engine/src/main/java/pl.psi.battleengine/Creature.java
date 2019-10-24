@@ -1,5 +1,7 @@
 package pl.psi.battleengine;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 
 class Creature {
 
@@ -8,7 +10,9 @@ class Creature {
     private final int defence;
     private final int attack;
     private final String name;
+    private boolean counterAttackedInThisTurn;
 
+    @Builder
     Creature(String aName, int aMaxHp, int aAttack, int aDefence) {
         maxHp = aMaxHp;
         currentHp = maxHp;
@@ -22,11 +26,14 @@ class Creature {
         aDefender.counterAttack(this);
     }
 
-    void counterAttack(Creature aDefender){
-        dealDamage(aDefender);
+    private void counterAttack(Creature aDefender){
+        if(!counterAttackedInThisTurn){
+            dealDamage(aDefender);
+            counterAttackedInThisTurn = true;
+        }
     }
 
-    private void dealDamage(Creature aDefender) {
+    protected void dealDamage(Creature aDefender) {
         int damage;
         if (aDefender.defence >= attack){
             damage = 1;
@@ -39,5 +46,9 @@ class Creature {
 
     int getCurrentHp() {
         return currentHp;
+    }
+
+    int getMaxHp() {
+        return maxHp;
     }
 }
