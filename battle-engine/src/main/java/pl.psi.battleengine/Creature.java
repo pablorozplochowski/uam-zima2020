@@ -18,7 +18,14 @@ class Creature {
     }
 
     void attack(Creature aDefender) {
-        aDefender.currentHp -= attack-aDefender.defence;
+        int damage;
+        if (aDefender.defence >= attack){
+            damage = 1;
+        }
+        else{
+            damage = attack-aDefender.defence;
+        }
+        aDefender.currentHp -= damage;
     }
 
     int getCurrentHp() {
