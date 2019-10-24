@@ -18,6 +18,15 @@ class Creature {
     }
 
     void attack(Creature aDefender) {
+        dealDamage(aDefender);
+        aDefender.counterAttack(this);
+    }
+
+    void counterAttack(Creature aDefender){
+        dealDamage(aDefender);
+    }
+
+    private void dealDamage(Creature aDefender) {
         int damage;
         if (aDefender.defence >= attack){
             damage = 1;
