@@ -32,4 +32,11 @@ class CreatureTest {
 
         assertEquals(9, centaur.getCurrentHp());
     }
+
+    @Test
+    void attackedCentaurShouldCounterAttack(){
+        imp.attack(centaur);
+
+        assertEquals(2, imp.getCurrentHp());
+    }
 }
