@@ -56,4 +56,8 @@ class Creature implements GuiTileIf{
     public String getIcon() {
         return name;
     }
+
+    String getName() {
+        return name;
+    }
 }

@@ -47,4 +47,14 @@ class BoardTest {
         assertEquals("CREATURE",board.getByPoint(new Point(0,0)).getIcon());
         assertEquals("X",board.getByPoint(new Point(0,1)).getIcon());
     }
+
+    @Test
+    void shouldThrowExceptionIfyouTryToAddGuiTileToNotEmptyTile(){
+        board.put(new Point(0,0), Creature.builder().aName("CREATURE").build());
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            board.put(new Point(0,0), new MapObstacle());
+        });
+    }
+
 }

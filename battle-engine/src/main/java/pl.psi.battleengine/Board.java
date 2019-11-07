@@ -13,6 +13,9 @@ class Board {
     }
 
     void put(Point aPoint, GuiTileIf aCreature) {
+        if (board.containsKey(aPoint)){
+            throw new IllegalArgumentException("Tile isn't empty");
+        }
         board.put(aPoint,aCreature);
     }
 
