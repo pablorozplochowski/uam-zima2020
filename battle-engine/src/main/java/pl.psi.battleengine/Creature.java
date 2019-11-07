@@ -3,7 +3,7 @@ package pl.psi.battleengine;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 
-class Creature {
+class Creature implements GuiTileIf{
 
     private final int maxHp;
     private int currentHp;
@@ -50,5 +50,10 @@ class Creature {
 
     int getMaxHp() {
         return maxHp;
+    }
+
+    @Override
+    public String getIcon() {
+        return name;
     }
 }
