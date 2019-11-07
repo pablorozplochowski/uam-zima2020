@@ -38,4 +38,13 @@ class BoardTest {
 
         assertEquals(obstacle, board.getByPoint(new Point(0,0)));
     }
+
+    @Test
+    void shouldRecognizeMapTileType(){
+        board.put(new Point(0,0), Creature.builder().aName("CREATURE").build());
+        board.put(new Point(0,1), new MapObstacle());
+
+        assertEquals("CREATURE",board.getByPoint(new Point(0,0)).getIcon());
+        assertEquals("X",board.getByPoint(new Point(0,1)).getIcon());
+    }
 }
