@@ -17,9 +17,14 @@ public class BattleEngine {
     }
 
     private void initBoard() {
-        List<Creature> creatures = hero1.getCreatures();
+        putHeroCreaturesToBoard(hero1, 0);
+        putHeroCreaturesToBoard(hero2, Board.WIDTH);
+    }
+
+    private void putHeroCreaturesToBoard(Hero aHero, int aColumnNumber) {
+        List<Creature> creatures = aHero.getCreatures();
         for (int i = 0; i < creatures.size(); i++) {
-            board.put(new Point(0,i*2+1), creatures.get(i));
+            board.put(new Point(aColumnNumber, i * 2 + 1), creatures.get(i));
         }
     }
 
