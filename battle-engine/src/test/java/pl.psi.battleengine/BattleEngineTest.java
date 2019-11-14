@@ -16,7 +16,14 @@ class BattleEngineTest {
         heroWithCreature.addCreature(Creature.builder().aName("C3").build());
         heroWithCreature.addCreature(Creature.builder().aName("C4").build());
         heroWithCreature.addCreature(Creature.builder().aName("C5").build());
-        BattleEngine engine = new BattleEngine(heroWithCreature, new Hero());
+
+        Hero hero2 = new Hero();
+        hero2.addCreature(Creature.builder().aName("C2_1").build());
+        hero2.addCreature(Creature.builder().aName("C2_2").build());
+        hero2.addCreature(Creature.builder().aName("C2_3").build());
+        hero2.addCreature(Creature.builder().aName("C2_4").build());
+        hero2.addCreature(Creature.builder().aName("C2_5").build());
+        BattleEngine engine = new BattleEngine(heroWithCreature, hero2);
 
         GuiTileIf result1 = engine.getByPoint(new Point(0, 1));
         GuiTileIf result2 = engine.getByPoint(new Point(0, 3));
@@ -29,6 +36,18 @@ class BattleEngineTest {
         assertEquals("C3", result3.getIcon());
         assertEquals("C4", result4.getIcon());
         assertEquals("C5", result5.getIcon());
+
+        GuiTileIf result21 = engine.getByPoint(new Point(Board.WIDTH, 1));
+        GuiTileIf result22 = engine.getByPoint(new Point(Board.WIDTH, 3));
+        GuiTileIf result23 = engine.getByPoint(new Point(Board.WIDTH, 5));
+        GuiTileIf result24 = engine.getByPoint(new Point(Board.WIDTH, 7));
+        GuiTileIf result25 = engine.getByPoint(new Point(Board.WIDTH, 9));
+
+        assertEquals("C2_1", result21.getIcon());
+        assertEquals("C2_2", result22.getIcon());
+        assertEquals("C2_3", result23.getIcon());
+        assertEquals("C2_4", result24.getIcon());
+        assertEquals("C2_5", result25.getIcon());
     }
 
 }

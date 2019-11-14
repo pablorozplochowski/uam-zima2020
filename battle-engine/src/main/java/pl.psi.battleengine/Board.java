@@ -7,6 +7,8 @@ import java.util.Map;
 class Board {
 
     private Map<Point,GuiTileIf> board;
+    public final static int WIDTH = 14;
+    public final static int HEIGHT = 10;
 
     Board() {
         board = new HashMap<>();
