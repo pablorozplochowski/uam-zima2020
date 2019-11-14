@@ -25,4 +25,13 @@ class Board {
     GuiTileIf getByPoint(Point aPoint) {
         return board.get(aPoint);
     }
+
+    Point getByCreature(Creature aCurrentCreature) {
+        for (Map.Entry<Point, GuiTileIf> entry : board.entrySet()) {
+            if (entry.getValue().equals(aCurrentCreature)) {
+                return entry.getKey();
+            }
+        }
+        throw new IllegalArgumentException("Creature is missing in board!");
+    }
 }

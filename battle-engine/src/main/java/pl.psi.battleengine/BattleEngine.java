@@ -1,10 +1,8 @@
 package pl.psi.battleengine;
 
 import java.awt.*;
-import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.*;
 import java.util.List;
-import java.util.Queue;
 
 public class BattleEngine {
 
@@ -24,11 +22,13 @@ public class BattleEngine {
     }
 
     private void initQueue() {
-        List<Creature> c1 = hero1.getCreatures();
-        c1.addAll(hero2.getCreatures());
-        creaturesQueue.addAll(c1);
-        System.err.println(hero1.getCreatures().size());
-//        hero1.getCreatures().addAll(hero2.getCreatures());
+        List<Creature> creatures = hero1.getCreatures();
+        creatures.addAll(hero2.getCreatures());
+        creatures.sort(Comparator.comparingInt(Creature::getMoveRange).reversed());
+        creaturesQueue.addAll(creatures);
+        Creature currentCreature = creaturesQueue.poll();
+        Point currentPoint = board.getByCreature(currentCreature);
+        activeCreature = new AbstractMap.SimpleEntry<>(currentPoint,currentCreature);
     }
 
     private void initBoard() {
@@ -45,10 +45,6 @@ public class BattleEngine {
 
     public GuiTileIf getByPoint(Point aPoint) {
         return board.getByPoint(aPoint);
-    }
-
-    public boolean isAttackAllowed(){
-        return false;
     }
 
     public Point getActiveCreaturePosition() {

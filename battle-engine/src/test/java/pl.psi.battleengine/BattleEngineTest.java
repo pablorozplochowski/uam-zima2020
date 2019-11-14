@@ -16,18 +16,18 @@ class BattleEngineTest {
     @BeforeEach
     void init(){
         hero1 = new Hero();
-        hero1.addCreature(Creature.builder().aName("C1").build());
-        hero1.addCreature(Creature.builder().aName("C2").build());
-        hero1.addCreature(Creature.builder().aName("C3").build());
-        hero1.addCreature(Creature.builder().aName("C4").build());
-        hero1.addCreature(Creature.builder().aName("C5").build());
+        hero1.addCreature(Creature.builder().aName("C1").aMoveRange(1).build());
+        hero1.addCreature(Creature.builder().aName("C2").aMoveRange(2).build());
+        hero1.addCreature(Creature.builder().aName("C3").aMoveRange(3).build());
+        hero1.addCreature(Creature.builder().aName("C4").aMoveRange(4).build());
+        hero1.addCreature(Creature.builder().aName("C5").aMoveRange(5).build());
 
         hero2 = new Hero();
-        hero2.addCreature(Creature.builder().aName("C2_1").build());
-        hero2.addCreature(Creature.builder().aName("C2_2").build());
-        hero2.addCreature(Creature.builder().aName("C2_3").build());
-        hero2.addCreature(Creature.builder().aName("C2_4").build());
-        hero2.addCreature(Creature.builder().aName("C2_5").build());
+        hero2.addCreature(Creature.builder().aName("C2_1").aMoveRange(11).build());
+        hero2.addCreature(Creature.builder().aName("C2_2").aMoveRange(12).build());
+        hero2.addCreature(Creature.builder().aName("C2_3").aMoveRange(13).build());
+        hero2.addCreature(Creature.builder().aName("C2_4").aMoveRange(14).build());
+        hero2.addCreature(Creature.builder().aName("C2_5").aMoveRange(15).build());
         engine = new BattleEngine(hero1, hero2);
 
     }
@@ -61,7 +61,9 @@ class BattleEngineTest {
 
     @Test
     void getCurrentCreatureShouldReturnCorrectCreature(){
-//        engine.getActiveCreaturePosition();
+        Point result = engine.getActiveCreaturePosition();
+
+        assertEquals(new Point(14,9),result);
     }
 
 }
