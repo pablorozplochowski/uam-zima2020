@@ -12,10 +12,13 @@ public class Hero {
     }
 
     void addCreature(Creature aCreature) {
+        if (creatures.size() >= 5){
+            throw new IllegalArgumentException("Heroes is full");
+        }
         creatures.add(aCreature);
     }
 
     List<Creature> getCreatures() {
-        return creatures;
+        return new ArrayList<>(creatures);
     }
 }

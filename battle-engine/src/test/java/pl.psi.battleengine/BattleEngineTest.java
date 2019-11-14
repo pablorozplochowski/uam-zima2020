@@ -1,5 +1,6 @@
 package pl.psi.battleengine;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.awt.*;
@@ -8,23 +9,31 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BattleEngineTest {
 
-    @Test
-    void getByPointZeroOneShouldReturnCreature(){
-        Hero heroWithCreature = new Hero();
-        heroWithCreature.addCreature(Creature.builder().aName("C1").build());
-        heroWithCreature.addCreature(Creature.builder().aName("C2").build());
-        heroWithCreature.addCreature(Creature.builder().aName("C3").build());
-        heroWithCreature.addCreature(Creature.builder().aName("C4").build());
-        heroWithCreature.addCreature(Creature.builder().aName("C5").build());
+    private Hero hero2;
+    private BattleEngine engine;
+    private Hero hero1;
 
-        Hero hero2 = new Hero();
+    @BeforeEach
+    void init(){
+        hero1 = new Hero();
+        hero1.addCreature(Creature.builder().aName("C1").build());
+        hero1.addCreature(Creature.builder().aName("C2").build());
+        hero1.addCreature(Creature.builder().aName("C3").build());
+        hero1.addCreature(Creature.builder().aName("C4").build());
+        hero1.addCreature(Creature.builder().aName("C5").build());
+
+        hero2 = new Hero();
         hero2.addCreature(Creature.builder().aName("C2_1").build());
         hero2.addCreature(Creature.builder().aName("C2_2").build());
         hero2.addCreature(Creature.builder().aName("C2_3").build());
         hero2.addCreature(Creature.builder().aName("C2_4").build());
         hero2.addCreature(Creature.builder().aName("C2_5").build());
-        BattleEngine engine = new BattleEngine(heroWithCreature, hero2);
+        engine = new BattleEngine(hero1, hero2);
 
+    }
+
+    @Test
+    void getByPointZeroOneShouldReturnCreature(){
         GuiTileIf result1 = engine.getByPoint(new Point(0, 1));
         GuiTileIf result2 = engine.getByPoint(new Point(0, 3));
         GuiTileIf result3 = engine.getByPoint(new Point(0, 5));
@@ -48,6 +57,11 @@ class BattleEngineTest {
         assertEquals("C2_3", result23.getIcon());
         assertEquals("C2_4", result24.getIcon());
         assertEquals("C2_5", result25.getIcon());
+    }
+
+    @Test
+    void getCurrentCreatureShouldReturnCorrectCreature(){
+//        engine.getActiveCreaturePosition();
     }
 
 }
