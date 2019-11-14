@@ -14,4 +14,8 @@ public class Hero {
     void addCreature(Creature aCreature) {
         creatures.add(aCreature);
     }
+
+    List<Creature> getCreatures() {
+        return creatures;
+    }
 }
