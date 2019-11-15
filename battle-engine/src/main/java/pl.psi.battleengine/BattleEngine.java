@@ -40,7 +40,7 @@ public class BattleEngine {
     }
 
     public boolean isAttackAllowed(Point aPoint) {
-        return true;
+        return isAttackRangeEnought(aPoint);
     }
 
     private void initQueue() {
@@ -80,5 +80,9 @@ public class BattleEngine {
 
     private boolean isMoveRangeEnought(Point aPoint) {
         return Point.distance(activeCreature.getKey().getX(),activeCreature.getKey().getY(), aPoint.getX(),aPoint.getY()) <= activeCreature.getValue().getMoveRange();
+    }
+
+    private boolean isAttackRangeEnought(Point aPoint) {
+        return Point.distance(activeCreature.getKey().getX(),activeCreature.getKey().getY(), aPoint.getX(),aPoint.getY()) <= activeCreature.getValue().getAttackRange();
     }
 }

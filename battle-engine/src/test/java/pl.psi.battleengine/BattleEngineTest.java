@@ -129,4 +129,6 @@ class BattleEngineTest {
         assertFalse(engine.isAttackAllowed(new Point(0,0)));
     }
 
+
+
 }

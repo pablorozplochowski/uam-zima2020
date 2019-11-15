@@ -66,4 +66,8 @@ class Creature implements GuiTileIf{
     int getMoveRange() {
         return moveRange;
     }
+
+    double getAttackRange() {
+        return 1.0;
+    }
 }
