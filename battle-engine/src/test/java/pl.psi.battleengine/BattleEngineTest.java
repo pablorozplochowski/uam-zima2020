@@ -109,7 +109,7 @@ class BattleEngineTest {
         engine.pass();
         engine.pass();
         engine.pass();
-        //pass for creature with 5 moveRange
+        //pass for creature with 5 moveRange in position (0, 9)
 
         assertTrue(engine.isMoveAllowed(new Point(5,9)));
         assertFalse(engine.isMoveAllowed(new Point(6,9)));
@@ -117,12 +117,11 @@ class BattleEngineTest {
         assertTrue(engine.isMoveAllowed(new Point(0,4)));
         assertFalse(engine.isMoveAllowed(new Point(0,3)));
 
-        assertTrue(engine.isMoveAllowed(new Point(2,6)));
-        assertFalse(engine.isMoveAllowed(new Point(2,5)));
-        assertFalse(engine.isMoveAllowed(new Point(3,6)));
+        assertTrue(engine.isMoveAllowed(new Point(2,5)));
+        assertFalse(engine.isMoveAllowed(new Point(2,4)));
 
-        assertTrue(engine.isMoveAllowed(new Point(1,5)));
-        assertFalse(engine.isMoveAllowed(new Point(2,5)));
+        assertTrue(engine.isMoveAllowed(new Point(0,4)));
+        assertFalse(engine.isMoveAllowed(new Point(1,4)));
     }
 
 }

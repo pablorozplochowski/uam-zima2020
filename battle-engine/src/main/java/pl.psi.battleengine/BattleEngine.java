@@ -70,7 +70,7 @@ public class BattleEngine {
         return creaturesQueue.isEmpty();
     }
 
-    boolean isMoveAllowed(Point aPoint) {
-        return board.isMoveAllowed(aPoint);
+    public boolean isMoveAllowed(Point aPoint) {
+        return Point.distance(activeCreature.getKey().getX(),activeCreature.getKey().getY(), aPoint.getX(),aPoint.getY()) <= activeCreature.getValue().getMoveRange() && board.isMoveAllowed(aPoint);
     }
 }
