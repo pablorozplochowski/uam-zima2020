@@ -134,4 +134,10 @@ class BattleEngineTest {
         assertFalse(engine.isAttackAllowed(new Point(14,8)));
     }
 
+    @Test
+    void attackIsPossibleWhileRangeIsEnoughtAndTileHasCreature(){
+        //cannot test without move method in engine or use mockito.
+//        assertFalse(engine.isAttackAllowed(new Point(14,8)));
+    }
+
 }
