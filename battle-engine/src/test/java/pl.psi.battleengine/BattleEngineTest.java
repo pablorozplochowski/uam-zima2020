@@ -129,6 +129,9 @@ class BattleEngineTest {
         assertFalse(engine.isAttackAllowed(new Point(0,0)));
     }
 
-
+    @Test
+    void attackIsNotPossibleWhileFieldIsEmpty(){
+        assertFalse(engine.isAttackAllowed(new Point(14,8)));
+    }
 
 }
