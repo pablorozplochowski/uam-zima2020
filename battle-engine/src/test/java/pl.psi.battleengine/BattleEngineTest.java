@@ -97,4 +97,9 @@ class BattleEngineTest {
         assertTrue(engine.isMoveAllowed(new Point(10,10)));
     }
 
+    @Test
+    void moveShouldNotBeAllowWhileTileIsNotEmpty(){
+        assertFalse(engine.isMoveAllowed(new Point(14,1)));
+    }
+
 }
