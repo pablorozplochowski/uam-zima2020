@@ -36,11 +36,11 @@ public class BattleEngine {
     }
 
     public boolean isMoveAllowed(Point aPoint) {
-        return isMoveRangeEnought(aPoint) && board.isMoveAllowed(aPoint);
+        return isMoveRangeEnought(aPoint) && board.isEmpty(aPoint);
     }
 
     public boolean isAttackAllowed(Point aPoint) {
-        return isAttackRangeEnought(aPoint);
+        return isAttackRangeEnought(aPoint) && !board.isEmpty(aPoint);
     }
 
     private void initQueue() {
