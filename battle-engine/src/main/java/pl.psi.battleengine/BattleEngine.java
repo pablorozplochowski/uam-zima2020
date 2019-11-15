@@ -35,6 +35,10 @@ public class BattleEngine {
         nextCreature();
     }
 
+    public boolean isMoveAllowed(Point aPoint) {
+        return isMoveRangeEnought(aPoint) && board.isMoveAllowed(aPoint);
+    }
+
     private void initQueue() {
         List<Creature> creatures = hero1.getCreatures();
         creatures.addAll(hero2.getCreatures());
@@ -70,7 +74,7 @@ public class BattleEngine {
         return creaturesQueue.isEmpty();
     }
 
-    public boolean isMoveAllowed(Point aPoint) {
-        return Point.distance(activeCreature.getKey().getX(),activeCreature.getKey().getY(), aPoint.getX(),aPoint.getY()) <= activeCreature.getValue().getMoveRange() && board.isMoveAllowed(aPoint);
+    private boolean isMoveRangeEnought(Point aPoint) {
+        return Point.distance(activeCreature.getKey().getX(),activeCreature.getKey().getY(), aPoint.getX(),aPoint.getY()) <= activeCreature.getValue().getMoveRange();
     }
 }
