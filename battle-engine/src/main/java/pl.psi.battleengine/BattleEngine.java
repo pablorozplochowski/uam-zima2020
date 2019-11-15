@@ -11,7 +11,7 @@ public class BattleEngine {
     private Hero hero2;
     private Board board;
     private HashMap.Entry<Point, Creature> activeCreature;
-    private List<Creature> ativatedCreaturesInThisTurn;
+    private List<Creature> activatedCreaturesInThisTurn;
 
     BattleEngine(Hero aHero1, Hero aHero2) {
         hero1 = aHero1;
@@ -19,8 +19,20 @@ public class BattleEngine {
         board = new Board();
         initBoard();
         creaturesQueue = new LinkedList<>();
-        ativatedCreaturesInThisTurn = new ArrayList<>();
+        activatedCreaturesInThisTurn = new ArrayList<>();
         initQueue();
+    }
+
+    public GuiTileIf getByPoint(Point aPoint) {
+        return board.getByPoint(aPoint);
+    }
+
+    public Point getActiveCreaturePosition() {
+        return activeCreature.getKey();
+    }
+
+    public void pass() {
+        nextCreature();
     }
 
     private void initQueue() {
@@ -43,25 +55,13 @@ public class BattleEngine {
         }
     }
 
-    public GuiTileIf getByPoint(Point aPoint) {
-        return board.getByPoint(aPoint);
-    }
-
-    public Point getActiveCreaturePosition() {
-        return activeCreature.getKey();
-    }
-
-    public void pass() {
-        nextCreature();
-    }
-
     private void nextCreature() {
         if(checkEndTurn()){
-            creaturesQueue.addAll(ativatedCreaturesInThisTurn);
-            ativatedCreaturesInThisTurn.clear();
+            creaturesQueue.addAll(activatedCreaturesInThisTurn);
+            activatedCreaturesInThisTurn.clear();
         }
         Creature currentCreature = creaturesQueue.poll();
-        ativatedCreaturesInThisTurn.add(currentCreature);
+        activatedCreaturesInThisTurn.add(currentCreature);
         Point currentPoint = board.getByCreature(currentCreature);
         activeCreature = new AbstractMap.SimpleEntry<>(currentPoint,currentCreature);
     }
