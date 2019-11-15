@@ -69,4 +69,8 @@ public class BattleEngine {
     private boolean checkEndTurn() {
         return creaturesQueue.isEmpty();
     }
+
+    boolean isMoveAllowed(Point aPoint) {
+        return false;
+    }
 }

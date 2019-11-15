@@ -92,4 +92,9 @@ class BattleEngineTest {
         assertEquals(new Point(14, 9), engine.getActiveCreaturePosition());
     }
 
+    @Test
+    void moveShouldBeAllowWhileTileIsEmpty(){
+        assertTrue(engine.isMoveAllowed(new Point(10,10)));
+    }
+
 }
