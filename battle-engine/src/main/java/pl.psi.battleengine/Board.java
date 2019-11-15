@@ -34,4 +34,8 @@ class Board {
         }
         throw new IllegalArgumentException("Creature is missing in board!");
     }
+
+    boolean isMoveAllowed(Point aPoint) {
+        return !board.containsKey(aPoint);
+    }
 }

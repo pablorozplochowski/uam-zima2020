@@ -71,6 +71,6 @@ public class BattleEngine {
     }
 
     boolean isMoveAllowed(Point aPoint) {
-        return false;
+        return board.isMoveAllowed(aPoint);
     }
 }
