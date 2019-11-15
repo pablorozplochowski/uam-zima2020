@@ -11,6 +11,7 @@ public class BattleEngine {
     private Hero hero2;
     private Board board;
     private HashMap.Entry<Point, Creature> activeCreature;
+    private List<Creature> ativatedCreaturesInThisTurn;
 
     BattleEngine(Hero aHero1, Hero aHero2) {
         hero1 = aHero1;
@@ -18,6 +19,7 @@ public class BattleEngine {
         board = new Board();
         initBoard();
         creaturesQueue = new LinkedList<>();
+        ativatedCreaturesInThisTurn = new ArrayList<>();
         initQueue();
     }
 
@@ -26,9 +28,7 @@ public class BattleEngine {
         creatures.addAll(hero2.getCreatures());
         creatures.sort(Comparator.comparingInt(Creature::getMoveRange).reversed());
         creaturesQueue.addAll(creatures);
-        Creature currentCreature = creaturesQueue.poll();
-        Point currentPoint = board.getByCreature(currentCreature);
-        activeCreature = new AbstractMap.SimpleEntry<>(currentPoint,currentCreature);
+        nextCreature();
     }
 
     private void initBoard() {
@@ -51,6 +51,22 @@ public class BattleEngine {
         return activeCreature.getKey();
     }
 
-    void pass() {
+    public void pass() {
+        nextCreature();
+    }
+
+    private void nextCreature() {
+        if(checkEndTurn()){
+            creaturesQueue.addAll(ativatedCreaturesInThisTurn);
+            ativatedCreaturesInThisTurn.clear();
+        }
+        Creature currentCreature = creaturesQueue.poll();
+        ativatedCreaturesInThisTurn.add(currentCreature);
+        Point currentPoint = board.getByCreature(currentCreature);
+        activeCreature = new AbstractMap.SimpleEntry<>(currentPoint,currentCreature);
+    }
+
+    private boolean checkEndTurn() {
+        return creaturesQueue.isEmpty();
     }
 }
