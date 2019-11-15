@@ -124,4 +124,9 @@ class BattleEngineTest {
         assertFalse(engine.isMoveAllowed(new Point(1,4)));
     }
 
+    @Test
+    void attackIsNotPossibleWhileMeleeCreatureIsNotNextToTarget(){
+        assertFalse(engine.isAttackAllowed(new Point(0,0)));
+    }
+
 }

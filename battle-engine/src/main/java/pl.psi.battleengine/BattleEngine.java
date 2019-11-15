@@ -39,6 +39,10 @@ public class BattleEngine {
         return isMoveRangeEnought(aPoint) && board.isMoveAllowed(aPoint);
     }
 
+    public boolean isAttackAllowed(Point aPoint) {
+        return true;
+    }
+
     private void initQueue() {
         List<Creature> creatures = hero1.getCreatures();
         creatures.addAll(hero2.getCreatures());
