@@ -14,7 +14,7 @@ class BattleEngineTest {
     private Hero hero1;
 
     @BeforeEach
-    void init(){
+    void init() {
         hero1 = new Hero();
         hero1.addCreature(Creature.builder().aName("C1").aMoveRange(1).build());
         hero1.addCreature(Creature.builder().aName("C2").aMoveRange(2).build());
@@ -33,7 +33,7 @@ class BattleEngineTest {
     }
 
     @Test
-    void getByPointZeroOneShouldReturnCreature(){
+    void getByPointZeroOneShouldReturnCreature() {
         GuiTileIf result1 = engine.getByPoint(new Point(0, 1));
         GuiTileIf result2 = engine.getByPoint(new Point(0, 3));
         GuiTileIf result3 = engine.getByPoint(new Point(0, 5));
@@ -60,10 +60,36 @@ class BattleEngineTest {
     }
 
     @Test
-    void getCurrentCreatureShouldReturnCorrectCreature(){
+    void getCurrentCreatureShouldReturnCorrectCreature() {
         Point result = engine.getActiveCreaturePosition();
 
-        assertEquals(new Point(14,9),result);
+        assertEquals(new Point(14, 9), result);
+    }
+
+    @Test
+    void checkQueueLoop(){
+        assertEquals(new Point(14, 9), engine.getActiveCreaturePosition());
+        engine.pass();
+        assertEquals(new Point(14, 7), engine.getActiveCreaturePosition());
+        engine.pass();
+        assertEquals(new Point(14, 5), engine.getActiveCreaturePosition());
+        engine.pass();
+        assertEquals(new Point(14, 3), engine.getActiveCreaturePosition());
+        engine.pass();
+        assertEquals(new Point(14, 1), engine.getActiveCreaturePosition());
+        engine.pass();
+        assertEquals(new Point(0, 9), engine.getActiveCreaturePosition());
+        engine.pass();
+        assertEquals(new Point(0, 7), engine.getActiveCreaturePosition());
+        engine.pass();
+        assertEquals(new Point(0, 5), engine.getActiveCreaturePosition());
+        engine.pass();
+        assertEquals(new Point(0, 3), engine.getActiveCreaturePosition());
+        engine.pass();
+        assertEquals(new Point(0, 1), engine.getActiveCreaturePosition());
+        engine.pass();
+        //end of turn -> all creatures passed
+        assertEquals(new Point(14, 9), engine.getActiveCreaturePosition());
     }
 
 }

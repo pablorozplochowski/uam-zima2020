@@ -50,4 +50,7 @@ public class BattleEngine {
     public Point getActiveCreaturePosition() {
         return activeCreature.getKey();
     }
+
+    void pass() {
+    }
 }
