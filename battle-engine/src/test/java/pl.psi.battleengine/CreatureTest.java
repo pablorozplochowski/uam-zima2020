@@ -18,7 +18,7 @@ class CreatureTest {
                 .aAttack(5)
                 .aDefence(3)
                 .build();
-        imp = new Creature("imp", 5,2,2);
+        imp = new Creature("imp", 5,2,2, 0);
     }
 
     @Test
@@ -55,7 +55,7 @@ class CreatureTest {
 
     @Test
     void shooterCouldNotBeCaunterAttacked(){
-        ShootingCreature shooter = new ShootingCreature("centaur",10,5,3);
+        ShootingCreature shooter = new ShootingCreature("centaur",10,5,3, 0);
         shooter.attack(imp);
 
         assertEquals(shooter.getMaxHp(), shooter.getCurrentHp());

@@ -11,14 +11,16 @@ class Creature implements GuiTileIf{
     private final int attack;
     private final String name;
     private boolean counterAttackedInThisTurn;
+    private final int moveRange;
 
     @Builder
-    Creature(String aName, int aMaxHp, int aAttack, int aDefence) {
+    Creature(String aName, int aMaxHp, int aAttack, int aDefence, int aMoveRange) {
         maxHp = aMaxHp;
         currentHp = maxHp;
         defence = aDefence;
         attack = aAttack;
         name = aName;
+        moveRange = aMoveRange;
     }
 
     void attack(Creature aDefender) {
@@ -59,5 +61,13 @@ class Creature implements GuiTileIf{
 
     String getName() {
         return name;
+    }
+
+    int getMoveRange() {
+        return moveRange;
+    }
+
+    double getAttackRange() {
+        return 1.0;
     }
 }

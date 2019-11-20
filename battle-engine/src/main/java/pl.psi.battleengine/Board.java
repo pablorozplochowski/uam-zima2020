@@ -7,6 +7,8 @@ import java.util.Map;
 class Board {
 
     private Map<Point,GuiTileIf> board;
+    public final static int WIDTH = 14;
+    public final static int HEIGHT = 10;
 
     Board() {
         board = new HashMap<>();
@@ -22,5 +24,18 @@ class Board {
 
     GuiTileIf getByPoint(Point aPoint) {
         return board.get(aPoint);
+    }
+
+    Point getByCreature(Creature aCurrentCreature) {
+        for (Map.Entry<Point, GuiTileIf> entry : board.entrySet()) {
+            if (entry.getValue().equals(aCurrentCreature)) {
+                return entry.getKey();
+            }
+        }
+        throw new IllegalArgumentException("Creature is missing in board!");
+    }
+
+    boolean isEmpty(Point aPoint) {
+        return !board.containsKey(aPoint);
     }
 }
