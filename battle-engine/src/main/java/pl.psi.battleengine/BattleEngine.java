@@ -21,6 +21,15 @@ public class BattleEngine {
         creaturesQueue = new LinkedList<>();
         activatedCreaturesInThisTurn = new ArrayList<>();
         initQueue();
+        addObstacles();
+    }
+
+    private void addObstacles() {
+        board.put(new Point(7,5),new MapObstacle());
+        board.put(new Point(7,6),new MapObstacle());
+        board.put(new Point(7,7),new MapObstacle());
+        board.put(new Point(7,4),new MapObstacle());
+        board.put(new Point(7,3),new MapObstacle());
     }
 
     public GuiTileIf getByPoint(Point aPoint) {
