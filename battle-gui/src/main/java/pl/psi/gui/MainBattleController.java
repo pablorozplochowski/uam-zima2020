@@ -3,9 +3,12 @@ package pl.psi.gui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import pl.psi.battleengine.BattleEngine;
 import pl.psi.battleengine.Creature;
 import pl.psi.battleengine.Hero;
+
+import java.awt.Point;
 
 public class MainBattleController {
 
@@ -35,12 +38,21 @@ public class MainBattleController {
     private void initialize() {
         for (int i = 0; i < 15 ; i++) {
             for (int j = 0; j < 10; j++) {
-                if(engine.getByPoint(i,j) == null){
-                    gridMap.add(new MapTile(""),i,j);
-                }else {
-                    gridMap.add(new MapTile(engine.getByPoint(i,j).getIcon()),i,j);
-                }
+                createTile(i,j);
             }
+        }
+    }
+
+    private void createTile(int i, int j) {
+        Point activePoint = engine.getActiveCreaturePosition();
+        if(engine.getByPoint(i,j) == null){
+            gridMap.add(new MapTile(""),i,j);
+        }else {
+            MapTile currentTile = new MapTile(engine.getByPoint(i, j).getIcon());
+            if (activePoint.equals(new Point(i,j))){
+                currentTile.getRect().setFill(Color.GREEN);
+            }
+            gridMap.add(currentTile,i,j);
         }
     }
 }
