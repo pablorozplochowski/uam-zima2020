@@ -15,6 +15,10 @@ public class MainBattleController {
 
     @FXML
     private void initialize() {
-        gridMap.add(new Label("NO WITAM!"),1,1);
+        for (int i = 0; i < 15 ; i++) {
+            for (int j = 0; j < 10; j++) {
+                gridMap.add(new MapTile("X"),i,j);
+            }
+        }
     }
 }
