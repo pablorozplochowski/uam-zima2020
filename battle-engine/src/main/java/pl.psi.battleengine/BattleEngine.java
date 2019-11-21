@@ -13,7 +13,7 @@ public class BattleEngine {
     private HashMap.Entry<Point, Creature> activeCreature;
     private List<Creature> activatedCreaturesInThisTurn;
 
-    BattleEngine(Hero aHero1, Hero aHero2) {
+    public BattleEngine(Hero aHero1, Hero aHero2) {
         hero1 = aHero1;
         hero2 = aHero2;
         board = new Board();
@@ -25,6 +25,10 @@ public class BattleEngine {
 
     public GuiTileIf getByPoint(Point aPoint) {
         return board.getByPoint(aPoint);
+    }
+
+    public GuiTileIf getByPoint(int x, int y) {
+        return getByPoint(new Point(x,y));
     }
 
     public Point getActiveCreaturePosition() {

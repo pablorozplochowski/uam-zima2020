@@ -1,6 +1,6 @@
 package pl.psi.battleengine;
 
-interface GuiTileIf {
+public interface GuiTileIf {
 
     String getIcon();
 }
