@@ -18,6 +18,10 @@
             <artifactId>battle-engine</artifactId>
             <version>${project.version}</version>
         </dependency>
-        
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>11-ea+25</version>
+        </dependency>
     </dependencies>
 </project>
