@@ -12,6 +12,7 @@ class BattleEngineTest {
     private Hero hero2;
     private BattleEngine engine;
     private Hero hero1;
+    private Creature highestSpeedCreature;
 
     @BeforeEach
     void init() {
@@ -22,12 +23,14 @@ class BattleEngineTest {
         hero1.addCreature(Creature.builder().aName("C4").aMoveRange(4).build());
         hero1.addCreature(Creature.builder().aName("C5").aMoveRange(5).build());
 
+        // 14 . 1
+        highestSpeedCreature = Creature.builder().aName("C2_5").aMoveRange(15).build();
         hero2 = new Hero();
+        hero2.addCreature(highestSpeedCreature);
         hero2.addCreature(Creature.builder().aName("C2_1").aMoveRange(11).build());
         hero2.addCreature(Creature.builder().aName("C2_2").aMoveRange(12).build());
         hero2.addCreature(Creature.builder().aName("C2_3").aMoveRange(13).build());
         hero2.addCreature(Creature.builder().aName("C2_4").aMoveRange(14).build());
-        hero2.addCreature(Creature.builder().aName("C2_5").aMoveRange(15).build());
         engine = new BattleEngine(hero1, hero2);
 
     }
@@ -140,4 +143,12 @@ class BattleEngineTest {
 //        assertFalse(engine.isAttackAllowed(new Point(14,8)));
     }
 
+    @Test
+    void moveTest(){
+        assertEquals(highestSpeedCreature, engine.getByPoint(14,1));
+        engine.move(10,10);
+
+        assertEquals(highestSpeedCreature, engine.getByPoint(10,10));
+        assertNull(engine.getByPoint(14,1));
+    }
 }

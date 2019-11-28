@@ -99,7 +99,7 @@ public class BattleEngine {
         return Point.distance(activeCreature.getKey().getX(),activeCreature.getKey().getY(), aPoint.getX(),aPoint.getY()) <= activeCreature.getValue().getAttackRange();
     }
 
-    private void move(int aX, int aY) {
+    void move(int aX, int aY) {
 
     }
 }
