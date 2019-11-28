@@ -24,7 +24,7 @@ public class MainBattleController {
         Hero h1 = new Hero();
         h1.addCreature(Creature.builder().aName("h1_1").build());
         h1.addCreature(Creature.builder().aName("h1_2").build());
-        h1.addCreature(Creature.builder().aName("h1_3").build());
+        h1.addCreature(Creature.builder().aName("h1_3").aMoveRange(5).build());
         h1.addCreature(Creature.builder().aName("h1_4").build());
         Hero h2 = new Hero();
         h2.addCreature(Creature.builder().aName("h2_1").build());
@@ -43,16 +43,18 @@ public class MainBattleController {
         }
     }
 
-    private void createTile(int i, int j) {
+    private void createTile(int aX, int aY) {
         Point activePoint = engine.getActiveCreaturePosition();
-        if(engine.getByPoint(i,j) == null){
-            gridMap.add(new MapTile(""),i,j);
-        }else {
-            MapTile currentTile = new MapTile(engine.getByPoint(i, j).getIcon());
-            if (activePoint.equals(new Point(i,j))){
-                currentTile.getRect().setFill(Color.GREEN);
-            }
-            gridMap.add(currentTile,i,j);
+        MapTile tile;
+
+        if(engine.getByPoint(aX,aY) !=null){
+            ObjectTileFactory tileFactory = new ObjectTileFactory(engine.getByPoint(aX,aY).getIcon());
+            tile = tileFactory.generateTile();
+        }else{
+            DefaultTileFactory tileFactory = new DefaultTileFactory();
+            tile = tileFactory.generateTile();
         }
+
+        gridMap.add(tile, aX,aY);
     }
 }
