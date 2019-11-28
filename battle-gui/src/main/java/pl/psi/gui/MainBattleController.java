@@ -50,7 +50,10 @@ public class MainBattleController {
         if(engine.getByPoint(aX,aY) !=null){
             tileFactory = new ObjectTileFactoryDecorator(tileFactory,engine.getByPoint(aX,aY).getIcon());
         }
-        
+
+        if(new Point(aX,aY).equals(engine.getActiveCreaturePosition())){
+            tileFactory = new ActiveObjectTileFactoryDecorator(tileFactory);
+        }
 
         tile = tileFactory.generateTile();
         gridMap.add(tile, aX,aY);

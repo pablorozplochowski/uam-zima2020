@@ -28,4 +28,8 @@ class MapTile extends StackPane {
     Rectangle getRect() {
         return rect;
     }
+
+    void setBackground(Color aColor) {
+        rect.setFill(aColor);
+    }
 }
