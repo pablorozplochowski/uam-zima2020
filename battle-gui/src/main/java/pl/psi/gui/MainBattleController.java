@@ -3,7 +3,6 @@ package pl.psi.gui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
 import pl.psi.battleengine.BattleEngine;
 import pl.psi.battleengine.Creature;
 import pl.psi.battleengine.Hero;
@@ -46,15 +45,14 @@ public class MainBattleController {
     private void createTile(int aX, int aY) {
         Point activePoint = engine.getActiveCreaturePosition();
         MapTile tile;
+        AbstractTileFactory tileFactory = new DefaultTileFactory();
 
         if(engine.getByPoint(aX,aY) !=null){
-            ObjectTileFactory tileFactory = new ObjectTileFactory(engine.getByPoint(aX,aY).getIcon());
-            tile = tileFactory.generateTile();
-        }else{
-            DefaultTileFactory tileFactory = new DefaultTileFactory();
-            tile = tileFactory.generateTile();
+            tileFactory = new ObjectTileFactoryDecorator(tileFactory,engine.getByPoint(aX,aY).getIcon());
         }
+        
 
+        tile = tileFactory.generateTile();
         gridMap.add(tile, aX,aY);
     }
 }

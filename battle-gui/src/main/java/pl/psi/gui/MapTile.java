@@ -8,6 +8,7 @@ import javafx.scene.shape.Rectangle;
 class MapTile extends StackPane {
 
     private final Rectangle rect;
+    private final Label label;
     private String name;
 
     MapTile(String aName) {
@@ -16,9 +17,13 @@ class MapTile extends StackPane {
         rect.setFill(Color.WHITE);
         rect.setStroke(Color.RED);
         getChildren().add(rect);
-        getChildren().add(new Label(name));
+        label = new Label(name);
+        getChildren().add(label);
     }
 
+    void setName(String aName){
+        label.setText(aName);
+    }
 
     Rectangle getRect() {
         return rect;
