@@ -38,4 +38,8 @@ class Board {
     boolean isEmpty(Point aPoint) {
         return !board.containsKey(aPoint);
     }
+
+    void remove(Point aPoint) {
+        board.remove(aPoint);
+    }
 }

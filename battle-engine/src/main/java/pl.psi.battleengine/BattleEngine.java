@@ -99,7 +99,12 @@ public class BattleEngine {
         return Point.distance(activeCreature.getKey().getX(),activeCreature.getKey().getY(), aPoint.getX(),aPoint.getY()) <= activeCreature.getValue().getAttackRange();
     }
 
-    void move(int aX, int aY) {
+    public void move(int aX, int aY) {
+        if (!isMoveAllowed(new Point(aX, aY))){
+            throw new IllegalArgumentException("To small move range!");
+        }
 
+        board.remove(activeCreature.getKey());
+        board.put(new Point (aX, aY), activeCreature.getValue());
     }
 }
