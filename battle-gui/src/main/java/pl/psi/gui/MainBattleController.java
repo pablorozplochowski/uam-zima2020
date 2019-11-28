@@ -55,6 +55,10 @@ public class MainBattleController {
             tileFactory = new ActiveObjectTileFactoryDecorator(tileFactory);
         }
 
+        if(engine.isMoveAllowed(new Point (aX, aY))){
+            tileFactory = new MovePossibleTileFactoryDecorator(tileFactory);
+        }
+
         tile = tileFactory.generateTile();
         gridMap.add(tile, aX,aY);
     }
