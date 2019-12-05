@@ -3,7 +3,7 @@ package pl.psi.battleengine;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 
-class Creature implements GuiTileIf{
+public class Creature implements GuiTileIf{
 
     private final int maxHp;
     private int currentHp;
