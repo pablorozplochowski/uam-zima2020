@@ -38,7 +38,10 @@ public class MainBattleController {
     private void initialize() {
         refreshGui();
 
-        passButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> refreshGui());
+        passButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+            engine.pass();
+            refreshGui();
+        });
     }
 
     private void refreshGui() {

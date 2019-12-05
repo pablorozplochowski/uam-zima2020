@@ -87,8 +87,7 @@ public class BattleEngine {
         activeCreature = new AbstractMap.SimpleEntry<>(currentPoint,currentCreature);
     }
 
-    private boolean checkEndTurn() {
-        return creaturesQueue.isEmpty();
+    private boolean checkEndTurn() {return creaturesQueue.isEmpty();
     }
 
     private boolean isMoveRangeEnought(Point aPoint) {
