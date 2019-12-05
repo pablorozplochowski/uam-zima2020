@@ -7,10 +7,11 @@ import javafx.scene.layout.GridPane;
 import pl.psi.battleengine.BattleEngine;
 import pl.psi.battleengine.Creature;
 import pl.psi.battleengine.Hero;
+import pl.psi.battleengine.ObserverIf;
 
 import java.awt.Point;
 
-public class MainBattleController {
+public class MainBattleController implements ObserverIf {
 
     @FXML
     private GridPane gridMap;
@@ -42,6 +43,12 @@ public class MainBattleController {
             engine.pass();
             refreshGui();
         });
+
+        engine.registerObserver(this);
+    }
+
+    public void update(){
+        refreshGui();
     }
 
     private void refreshGui() {

@@ -12,11 +12,13 @@ public class BattleEngine {
     private Board board;
     private HashMap.Entry<Point, Creature> activeCreature;
     private List<Creature> activatedCreaturesInThisTurn;
+    private final List<ObserverIf> observers;
 
     public BattleEngine(Hero aHero1, Hero aHero2) {
         hero1 = aHero1;
         hero2 = aHero2;
         board = new Board();
+        observers = new ArrayList<>();
         initBoard();
         creaturesQueue = new LinkedList<>();
         activatedCreaturesInThisTurn = new ArrayList<>();
@@ -105,6 +107,15 @@ public class BattleEngine {
 
         board.remove(activeCreature.getKey());
         board.put(new Point (aX, aY), activeCreature.getValue());
+
+        fire();
     }
 
+    public void registerObserver(ObserverIf aObs) {
+        observers.add(aObs);
+    }
+
+    private void fire(){
+        observers.forEach(ObserverIf::update);
+    }
 }
