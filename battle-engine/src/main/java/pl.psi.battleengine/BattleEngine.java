@@ -107,4 +107,5 @@ public class BattleEngine {
         board.remove(activeCreature.getKey());
         board.put(new Point (aX, aY), activeCreature.getValue());
     }
+
 }

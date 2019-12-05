@@ -2,6 +2,7 @@ package pl.psi.gui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import pl.psi.battleengine.BattleEngine;
 import pl.psi.battleengine.Creature;
@@ -35,6 +36,12 @@ public class MainBattleController {
 
     @FXML
     private void initialize() {
+        refreshGui();
+
+        passButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> refreshGui());
+    }
+
+    private void refreshGui() {
         for (int i = 0; i < 15 ; i++) {
             for (int j = 0; j < 10; j++) {
                 createTile(i,j);
@@ -56,7 +63,7 @@ public class MainBattleController {
         }
 
         if(engine.isMoveAllowed(new Point (aX, aY))){
-            tileFactory = new MovePossibleTileFactoryDecorator(tileFactory);
+            tileFactory = new MovePossibleTileFactoryDecorator(tileFactory, new Point(aX, aY),engine);
         }
 
         tile = tileFactory.generateTile();
