@@ -1,24 +1,27 @@
 package pl.psi.battleengine;
 
 import java.awt.*;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.*;
 import java.util.List;
 
 public class BattleEngine {
 
+    public static final String CREATURE_MOVED = "CREATURE_MOVED";
     private final Queue<Creature> creaturesQueue;
     private Hero hero1;
     private Hero hero2;
     private Board board;
     private HashMap.Entry<Point, Creature> activeCreature;
     private List<Creature> activatedCreaturesInThisTurn;
-    private final List<ObserverIf> observers;
+    private final PropertyChangeSupport obsSupport;
 
     public BattleEngine(Hero aHero1, Hero aHero2) {
         hero1 = aHero1;
         hero2 = aHero2;
         board = new Board();
-        observers = new ArrayList<>();
+        obsSupport = new PropertyChangeSupport(this);
         initBoard();
         creaturesQueue = new LinkedList<>();
         activatedCreaturesInThisTurn = new ArrayList<>();
@@ -108,14 +111,10 @@ public class BattleEngine {
         board.remove(activeCreature.getKey());
         board.put(new Point (aX, aY), activeCreature.getValue());
 
-        fire();
+        obsSupport.firePropertyChange(CREATURE_MOVED,null,null);
     }
 
-    public void registerObserver(ObserverIf aObs) {
-        observers.add(aObs);
-    }
-
-    private void fire(){
-        observers.forEach(ObserverIf::update);
+    public void registerObserver(String eventType, PropertyChangeListener aObs){
+        obsSupport.addPropertyChangeListener(eventType, aObs);
     }
 }

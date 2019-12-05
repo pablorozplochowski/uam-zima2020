@@ -10,8 +10,10 @@ import pl.psi.battleengine.Hero;
 import pl.psi.battleengine.ObserverIf;
 
 import java.awt.Point;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
-public class MainBattleController implements ObserverIf {
+public class MainBattleController implements PropertyChangeListener {
 
     @FXML
     private GridPane gridMap;
@@ -44,11 +46,7 @@ public class MainBattleController implements ObserverIf {
             refreshGui();
         });
 
-        engine.registerObserver(this);
-    }
-
-    public void update(){
-        refreshGui();
+        engine.registerObserver(BattleEngine.CREATURE_MOVED, this);
     }
 
     private void refreshGui() {
@@ -78,5 +76,10 @@ public class MainBattleController implements ObserverIf {
 
         tile = tileFactory.generateTile();
         gridMap.add(tile, aX,aY);
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        refreshGui();
     }
 }
