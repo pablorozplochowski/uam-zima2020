@@ -5,7 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import pl.psi.battleengine.BattleEngine;
-import pl.psi.battleengine.creatures.Creature;
+import pl.psi.battleengine.creatures.CreatureStack;
 import pl.psi.battleengine.creatures.Hero;
 
 import java.awt.Point;
@@ -24,15 +24,15 @@ public class MainBattleController implements PropertyChangeListener {
 
     public MainBattleController() {
         Hero h1 = new Hero();
-        h1.addCreature(Creature.builder().aName("h1_1").build());
-        h1.addCreature(Creature.builder().aName("h1_2").build());
-        h1.addCreature(Creature.builder().aName("h1_3").aMoveRange(5).build());
-        h1.addCreature(Creature.builder().aName("h1_4").build());
+        h1.addCreature(CreatureStack.builder().aName("h1_1").build());
+        h1.addCreature(CreatureStack.builder().aName("h1_2").build());
+        h1.addCreature(CreatureStack.builder().aName("h1_3").aMoveRange(5).build());
+        h1.addCreature(CreatureStack.builder().aName("h1_4").build());
         Hero h2 = new Hero();
-        h2.addCreature(Creature.builder().aName("h2_1").build());
-        h2.addCreature(Creature.builder().aName("h2_2").build());
-        h2.addCreature(Creature.builder().aName("h2_3").build());
-        h2.addCreature(Creature.builder().aName("h2_4").build());
+        h2.addCreature(CreatureStack.builder().aName("h2_1").build());
+        h2.addCreature(CreatureStack.builder().aName("h2_2").build());
+        h2.addCreature(CreatureStack.builder().aName("h2_3").build());
+        h2.addCreature(CreatureStack.builder().aName("h2_4").build());
         engine = new BattleEngine(h1,h2);
     }
 

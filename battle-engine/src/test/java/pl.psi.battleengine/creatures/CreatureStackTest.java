@@ -1,26 +1,24 @@
-package pl.psi.battleengine;
+package pl.psi.battleengine.creatures;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import pl.psi.battleengine.creatures.Creature;
-import pl.psi.battleengine.creatures.ShootingCreature;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CreatureTest {
+class CreatureStackTest {
 
-    private Creature centaur;
-    private Creature imp;
+    private CreatureStack centaur;
+    private CreatureStack imp;
 
     @BeforeEach
     void init(){
-        centaur = Creature.builder()
+        centaur = CreatureStack.builder()
                 .aName("centaur")
                 .aMaxHp(10)
                 .aAttack(5)
                 .aDefence(3)
                 .build();
-        imp = new Creature("imp", 5,2,2, 0);
+        imp = new CreatureStack("imp", 5,2,2, 0);
     }
 
     @Test
@@ -57,7 +55,7 @@ class CreatureTest {
 
     @Test
     void shooterCouldNotBeCaunterAttacked(){
-        ShootingCreature shooter = new ShootingCreature("centaur",10,5,3, 0);
+        ShootingCreatureStack shooter = new ShootingCreatureStack("centaur",10,5,3, 0);
         shooter.attack(imp);
 
         assertEquals(shooter.getMaxHp(), shooter.getCurrentHp());

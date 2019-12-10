@@ -1,26 +1,24 @@
 package pl.psi.battleengine.creatures;
 
-import pl.psi.battleengine.creatures.Creature;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class Hero {
 
-    private List<Creature> creatures;
+    private List<CreatureStack> creatureStacks;
 
     public Hero() {
-        creatures = new ArrayList<>();
+        creatureStacks = new ArrayList<>();
     }
 
-    public void addCreature(Creature aCreature) {
-        if (creatures.size() >= 5){
+    public void addCreature(CreatureStack aCreatureStack) {
+        if (creatureStacks.size() >= 5){
             throw new IllegalArgumentException("Heroes is full");
         }
-        creatures.add(aCreature);
+        creatureStacks.add(aCreatureStack);
     }
 
-    List<Creature> getCreatures() {
-        return new ArrayList<>(creatures);
+    public List<CreatureStack> getCreatureStacks() {
+        return new ArrayList<>(creatureStacks);
     }
 }

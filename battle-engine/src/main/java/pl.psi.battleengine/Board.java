@@ -1,6 +1,6 @@
 package pl.psi.battleengine;
 
-import pl.psi.battleengine.creatures.Creature;
+import pl.psi.battleengine.creatures.CreatureStack;
 import pl.psi.battleengine.move.GuiTileIf;
 
 import java.awt.*;
@@ -29,13 +29,13 @@ class Board {
         return board.get(aPoint);
     }
 
-    Point getByCreature(Creature aCurrentCreature) {
+    Point getByCreature(CreatureStack aCurrentCreatureStack) {
         for (Map.Entry<Point, GuiTileIf> entry : board.entrySet()) {
-            if (entry.getValue().equals(aCurrentCreature)) {
+            if (entry.getValue().equals(aCurrentCreatureStack)) {
                 return entry.getKey();
             }
         }
-        throw new IllegalArgumentException("Creature is missing in board!");
+        throw new IllegalArgumentException("CreatureStack is missing in board!");
     }
 
     boolean isEmpty(Point aPoint) {

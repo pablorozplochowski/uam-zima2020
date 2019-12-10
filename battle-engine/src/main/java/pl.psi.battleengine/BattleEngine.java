@@ -1,8 +1,7 @@
 package pl.psi.battleengine;
 
-import pl.psi.battleengine.creatures.Creature;
+import pl.psi.battleengine.creatures.CreatureStack;
 import pl.psi.battleengine.creatures.Hero;
-import pl.psi.battleengine.move.Board;
 import pl.psi.battleengine.move.GuiTileIf;
 import pl.psi.battleengine.move.MapObstacle;
 
@@ -14,13 +13,16 @@ import java.util.List;
 
 public class BattleEngine {
 
+    public final static int WIDTH = Board.WIDTH;
+    public final static int HEIGHT = Board.HEIGHT;
+
     public static final String CREATURE_MOVED = "CREATURE_MOVED";
-    private final Queue<Creature> creaturesQueue;
+    private final Queue<CreatureStack> creaturesQueue;
     private Hero hero1;
     private Hero hero2;
     private Board board;
-    private HashMap.Entry<Point, Creature> activeCreature;
-    private List<Creature> activatedCreaturesInThisTurn;
+    private HashMap.Entry<Point, CreatureStack> activeCreature;
+    private List<CreatureStack> activatedCreaturesInThisTurn;
     private final PropertyChangeSupport obsSupport;
 
     public BattleEngine(Hero aHero1, Hero aHero2) {
@@ -68,10 +70,10 @@ public class BattleEngine {
     }
 
     private void initQueue() {
-        List<Creature> creatures = hero1.getCreatures();
-        creatures.addAll(hero2.getCreatures());
-        creatures.sort(Comparator.comparingInt(Creature::getMoveRange).reversed());
-        creaturesQueue.addAll(creatures);
+        List<CreatureStack> creatureStacks = hero1.getCreatureStacks();
+        creatureStacks.addAll(hero2.getCreatureStacks());
+        creatureStacks.sort(Comparator.comparingInt(CreatureStack::getMoveRange).reversed());
+        creaturesQueue.addAll(creatureStacks);
         nextCreature();
     }
 
@@ -81,9 +83,9 @@ public class BattleEngine {
     }
 
     private void putHeroCreaturesToBoard(Hero aHero, int aColumnNumber) {
-        List<Creature> creatures = aHero.getCreatures();
-        for (int i = 0; i < creatures.size(); i++) {
-            board.put(new Point(aColumnNumber, i * 2 + 1), creatures.get(i));
+        List<CreatureStack> creatureStacks = aHero.getCreatureStacks();
+        for (int i = 0; i < creatureStacks.size(); i++) {
+            board.put(new Point(aColumnNumber, i * 2 + 1), creatureStacks.get(i));
         }
     }
 
@@ -92,10 +94,10 @@ public class BattleEngine {
             creaturesQueue.addAll(activatedCreaturesInThisTurn);
             activatedCreaturesInThisTurn.clear();
         }
-        Creature currentCreature = creaturesQueue.poll();
-        activatedCreaturesInThisTurn.add(currentCreature);
-        Point currentPoint = board.getByCreature(currentCreature);
-        activeCreature = new AbstractMap.SimpleEntry<>(currentPoint,currentCreature);
+        CreatureStack currentCreatureStack = creaturesQueue.poll();
+        activatedCreaturesInThisTurn.add(currentCreatureStack);
+        Point currentPoint = board.getByCreature(currentCreatureStack);
+        activeCreature = new AbstractMap.SimpleEntry<>(currentPoint, currentCreatureStack);
     }
 
     private boolean checkEndTurn() {return creaturesQueue.isEmpty();
