@@ -26,11 +26,11 @@ class BattleEngineTest {
         // 14 . 1
         highestSpeedCreature = Creature.builder().aName("C2_5").aMoveRange(15).build();
         hero2 = new Hero();
-        hero2.addCreature(highestSpeedCreature);
         hero2.addCreature(Creature.builder().aName("C2_1").aMoveRange(11).build());
         hero2.addCreature(Creature.builder().aName("C2_2").aMoveRange(12).build());
         hero2.addCreature(Creature.builder().aName("C2_3").aMoveRange(13).build());
         hero2.addCreature(Creature.builder().aName("C2_4").aMoveRange(14).build());
+        hero2.addCreature(highestSpeedCreature);
         engine = new BattleEngine(hero1, hero2);
 
     }
@@ -57,9 +57,9 @@ class BattleEngineTest {
 
         assertEquals("C2_1", result21.getIcon());
         assertEquals("C2_2", result22.getIcon());
+        assertEquals("C2_5", result25.getIcon());
         assertEquals("C2_3", result23.getIcon());
         assertEquals("C2_4", result24.getIcon());
-        assertEquals("C2_5", result25.getIcon());
     }
 
     @Test
