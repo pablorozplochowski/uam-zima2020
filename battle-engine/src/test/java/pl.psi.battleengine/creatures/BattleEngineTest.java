@@ -58,9 +58,9 @@ class BattleEngineTest {
 
         Assertions.assertEquals("C2_1", result21.getIcon());
         Assertions.assertEquals("C2_2", result22.getIcon());
-        Assertions.assertEquals("C2_5", result25.getIcon());
         Assertions.assertEquals("C2_3", result23.getIcon());
         Assertions.assertEquals("C2_4", result24.getIcon());
+        Assertions.assertEquals("C2_5", result25.getIcon());
     }
 
     @Test
@@ -146,10 +146,10 @@ class BattleEngineTest {
 
     @Test
     void moveTest(){
-        Assertions.assertEquals(highestSpeedCreatureStack, engine.getByPoint(14,1));
+        Assertions.assertEquals(highestSpeedCreatureStack, engine.getByPoint(14,9));
         engine.move(10,10);
 
         Assertions.assertEquals(highestSpeedCreatureStack, engine.getByPoint(10,10));
-        Assertions.assertNull(engine.getByPoint(14,1));
+        Assertions.assertNull(engine.getByPoint(14,9));
     }
 }
