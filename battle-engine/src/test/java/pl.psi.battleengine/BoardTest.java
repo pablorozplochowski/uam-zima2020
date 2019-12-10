@@ -2,6 +2,9 @@ package pl.psi.battleengine;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import pl.psi.battleengine.creatures.Creature;
+import pl.psi.battleengine.move.Board;
+import pl.psi.battleengine.move.MapObstacle;
 
 import java.awt.*;
 

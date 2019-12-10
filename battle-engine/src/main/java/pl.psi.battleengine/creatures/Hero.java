@@ -1,4 +1,6 @@
-package pl.psi.battleengine;
+package pl.psi.battleengine.creatures;
+
+import pl.psi.battleengine.creatures.Creature;
 
 import java.util.ArrayList;
 import java.util.List;

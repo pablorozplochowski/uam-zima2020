@@ -1,13 +1,12 @@
-package pl.psi.gui;
+package pl.psi.economyengine.hero.gui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import pl.psi.battleengine.BattleEngine;
-import pl.psi.battleengine.Creature;
-import pl.psi.battleengine.Hero;
-import pl.psi.battleengine.ObserverIf;
+import pl.psi.battleengine.creatures.Creature;
+import pl.psi.battleengine.creatures.Hero;
 
 import java.awt.Point;
 import java.beans.PropertyChangeEvent;

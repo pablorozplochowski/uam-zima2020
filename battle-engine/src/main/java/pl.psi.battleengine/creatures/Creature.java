@@ -1,9 +1,9 @@
-package pl.psi.battleengine;
+package pl.psi.battleengine.creatures;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
+import pl.psi.battleengine.move.GuiTileIf;
 
-public class Creature implements GuiTileIf{
+public class Creature implements GuiTileIf {
 
     private final int maxHp;
     private int currentHp;

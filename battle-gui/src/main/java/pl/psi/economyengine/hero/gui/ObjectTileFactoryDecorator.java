@@ -1,4 +1,4 @@
-package pl.psi.gui;
+package pl.psi.economyengine.hero.gui;
 
 class ObjectTileFactoryDecorator extends AbstractTileFactory{
 

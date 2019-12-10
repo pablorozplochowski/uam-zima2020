@@ -1,4 +1,4 @@
-package pl.psi.battleengine;
+package pl.psi.battleengine.move;
 
 public interface GuiTileIf {
 

@@ -1,5 +1,8 @@
 package pl.psi.battleengine;
 
+import pl.psi.battleengine.creatures.Creature;
+import pl.psi.battleengine.move.GuiTileIf;
+
 import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;

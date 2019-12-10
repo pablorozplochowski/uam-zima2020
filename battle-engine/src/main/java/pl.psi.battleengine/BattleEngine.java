@@ -1,5 +1,11 @@
 package pl.psi.battleengine;
 
+import pl.psi.battleengine.creatures.Creature;
+import pl.psi.battleengine.creatures.Hero;
+import pl.psi.battleengine.move.Board;
+import pl.psi.battleengine.move.GuiTileIf;
+import pl.psi.battleengine.move.MapObstacle;
+
 import java.awt.*;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
