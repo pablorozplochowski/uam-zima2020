@@ -1,4 +1,4 @@
-package pl.psi.battleengine.classicatack;
+package pl.psi.battleengine.attackengine;
 
 import pl.psi.battleengine.BattleEngine;
 import pl.psi.battleengine.Board;

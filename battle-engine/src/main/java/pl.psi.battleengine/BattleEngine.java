@@ -1,7 +1,7 @@
 package pl.psi.battleengine;
 
 
-import pl.psi.battleengine.classicatack.AttackingEngine;
+import pl.psi.battleengine.attackengine.AttackingEngine;
 import pl.psi.battleengine.creatures.CreatureStack;
 import pl.psi.battleengine.creatures.HeroInBattle;
 import pl.psi.battleengine.move.GuiTileIf;
