@@ -7,7 +7,7 @@ import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
-class Board {
+public class Board {
 
     private Map<Point,GuiTileIf> board;
     public final static int WIDTH = 14;
@@ -17,7 +17,7 @@ class Board {
         board = new HashMap<>();
     }
 
-    void put(Point aPoint, GuiTileIf aCreature) {
+    public void put(Point aPoint, GuiTileIf aCreature) {
         if (board.containsKey(aPoint)){
             throw new IllegalArgumentException("Tile isn't empty");
         }
@@ -38,11 +38,11 @@ class Board {
         throw new IllegalArgumentException("CreatureStack is missing in board!");
     }
 
-    boolean isEmpty(Point aPoint) {
+    public boolean isEmpty(Point aPoint) {
         return !board.containsKey(aPoint);
     }
 
-    void remove(Point aPoint) {
+    public void remove(Point aPoint) {
         board.remove(aPoint);
     }
 }
