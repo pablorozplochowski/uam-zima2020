@@ -1,11 +1,12 @@
 package pl.psi.battleengine;
 
 
+import pl.psi.battleengine.classicatack.AttackingEngine;
 import pl.psi.battleengine.creatures.CreatureStack;
 import pl.psi.battleengine.creatures.HeroInBattle;
 import pl.psi.battleengine.move.GuiTileIf;
 import pl.psi.battleengine.move.MapObstacle;
-import pl.psi.battleengine.move.MoveEngine;
+import pl.psi.battleengine.move.MovingEngine;
 
 import java.awt.*;
 import java.beans.PropertyChangeListener;
@@ -26,8 +27,8 @@ public class BattleEngine {
     private final HeroInBattle hero2;
     private final Board board;
 
-    private final MoveEngine moveEngine;
-
+    private final MovingEngine moveEngine;
+    private final AttackingEngine attackingEngine;
 
     private final PropertyChangeSupport obsSupport;
 
@@ -36,11 +37,12 @@ public class BattleEngine {
 
 
     public BattleEngine(HeroInBattle aHero1, HeroInBattle aHero2) {
+        obsSupport = new PropertyChangeSupport(this);
         hero1 = aHero1;
         hero2 = aHero2;
         board = new Board();
-        moveEngine = new MoveEngine(board, this);
-        obsSupport = new PropertyChangeSupport(this);
+        moveEngine = new MovingEngine(board, this);
+        attackingEngine = new AttackingEngine(board, this);
         initBoard();
         creaturesQueue = new LinkedList<>();
         activatedCreaturesInThisTurn = new ArrayList<>();
@@ -86,7 +88,7 @@ public class BattleEngine {
     }
 
     public boolean isAttackAllowed(Point aPoint) {
-        return isAttackRangeEnought(aPoint) && !board.isEmpty(aPoint);
+        return attackingEngine.isAttackAllowed(aPoint);
     }
 
     private void initQueue() {
@@ -126,10 +128,5 @@ public class BattleEngine {
 
     private boolean checkEndTurn() {
         return creaturesQueue.isEmpty();
-    }
-
-
-    private boolean isAttackRangeEnought(Point aPoint) {
-        return Point.distance(activeCreature.getKey().getX(), activeCreature.getKey().getY(), aPoint.getX(), aPoint.getY()) <= activeCreature.getValue().getAttackRange();
     }
 }

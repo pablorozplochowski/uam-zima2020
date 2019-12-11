@@ -10,12 +10,12 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.HashMap;
 
-public class MoveEngine implements PropertyChangeListener{
+public class MovingEngine implements PropertyChangeListener{
 
     private final Board board;
     private HashMap.Entry<Point, CreatureStack> currentCreature;
 
-    public MoveEngine(Board aBoard, BattleEngine aBattleEngine) {
+    public MovingEngine(Board aBoard, BattleEngine aBattleEngine) {
         board = aBoard;
         aBattleEngine.registerObserver(BattleEngine.ACTIVE_CREATURE_CHANGED, this);
     }
