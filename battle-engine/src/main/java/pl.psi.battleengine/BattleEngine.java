@@ -1,5 +1,13 @@
 package pl.psi.battleengine;
 
+
+import pl.psi.battleengine.classicatack.AttackingEngine;
+import pl.psi.battleengine.creatures.CreatureStack;
+import pl.psi.battleengine.creatures.HeroInBattle;
+import pl.psi.battleengine.move.GuiTileIf;
+import pl.psi.battleengine.move.MapObstacle;
+import pl.psi.battleengine.move.MovingEngine;
+
 import java.awt.*;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -8,20 +16,33 @@ import java.util.List;
 
 public class BattleEngine {
 
+    public final static int WIDTH = Board.WIDTH;
+    public final static int HEIGHT = Board.HEIGHT;
+
     public static final String CREATURE_MOVED = "CREATURE_MOVED";
-    private final Queue<Creature> creaturesQueue;
-    private Hero hero1;
-    private Hero hero2;
-    private Board board;
-    private HashMap.Entry<Point, Creature> activeCreature;
-    private List<Creature> activatedCreaturesInThisTurn;
+    public static final String ACTIVE_CREATURE_CHANGED = "ACTIVE_CREATURE_CHANGED";
+    public static final String END_OF_TURN = "END_OF_TURN";
+    private final Queue<CreatureStack> creaturesQueue;
+    private final HeroInBattle hero1;
+    private final HeroInBattle hero2;
+    private final Board board;
+
+    private final MovingEngine moveEngine;
+    private final AttackingEngine attackingEngine;
+
     private final PropertyChangeSupport obsSupport;
 
-    public BattleEngine(Hero aHero1, Hero aHero2) {
+    private final List<CreatureStack> activatedCreaturesInThisTurn;
+    private HashMap.Entry<Point, CreatureStack> activeCreature;
+
+
+    public BattleEngine(HeroInBattle aHero1, HeroInBattle aHero2) {
+        obsSupport = new PropertyChangeSupport(this);
         hero1 = aHero1;
         hero2 = aHero2;
         board = new Board();
-        obsSupport = new PropertyChangeSupport(this);
+        moveEngine = new MovingEngine(board, this);
+        attackingEngine = new AttackingEngine(board, this);
         initBoard();
         creaturesQueue = new LinkedList<>();
         activatedCreaturesInThisTurn = new ArrayList<>();
@@ -30,11 +51,11 @@ public class BattleEngine {
     }
 
     private void addObstacles() {
-        board.put(new Point(7,5),new MapObstacle());
-        board.put(new Point(7,6),new MapObstacle());
-        board.put(new Point(7,7),new MapObstacle());
-        board.put(new Point(7,4),new MapObstacle());
-        board.put(new Point(7,3),new MapObstacle());
+        board.put(new Point(7, 5), new MapObstacle());
+        board.put(new Point(7, 6), new MapObstacle());
+        board.put(new Point(7, 7), new MapObstacle());
+        board.put(new Point(7, 4), new MapObstacle());
+        board.put(new Point(7, 3), new MapObstacle());
     }
 
     public GuiTileIf getByPoint(Point aPoint) {
@@ -42,7 +63,7 @@ public class BattleEngine {
     }
 
     public GuiTileIf getByPoint(int x, int y) {
-        return getByPoint(new Point(x,y));
+        return getByPoint(new Point(x, y));
     }
 
     public Point getActiveCreaturePosition() {
@@ -54,18 +75,27 @@ public class BattleEngine {
     }
 
     public boolean isMoveAllowed(Point aPoint) {
-        return isMoveRangeEnought(aPoint) && board.isEmpty(aPoint);
+        return moveEngine.isMoveAllowed(aPoint);
+    }
+
+    public void move(int aX, int aY) {
+        moveEngine.move(aX, aY);
+        obsSupport.firePropertyChange(CREATURE_MOVED, null, null);
+    }
+
+    public void registerObserver(String eventType, PropertyChangeListener aObs) {
+        obsSupport.addPropertyChangeListener(eventType, aObs);
     }
 
     public boolean isAttackAllowed(Point aPoint) {
-        return isAttackRangeEnought(aPoint) && !board.isEmpty(aPoint);
+        return attackingEngine.isAttackAllowed(aPoint);
     }
 
     private void initQueue() {
-        List<Creature> creatures = hero1.getCreatures();
-        creatures.addAll(hero2.getCreatures());
-        creatures.sort(Comparator.comparingInt(Creature::getMoveRange).reversed());
-        creaturesQueue.addAll(creatures);
+        List<CreatureStack> creatureStacks = hero1.getCreatureStacks();
+        creatureStacks.addAll(hero2.getCreatureStacks());
+        creatureStacks.sort(Comparator.comparingInt(CreatureStack::getMoveRange).reversed());
+        creaturesQueue.addAll(creatureStacks);
         nextCreature();
     }
 
@@ -74,47 +104,29 @@ public class BattleEngine {
         putHeroCreaturesToBoard(hero2, Board.WIDTH);
     }
 
-    private void putHeroCreaturesToBoard(Hero aHero, int aColumnNumber) {
-        List<Creature> creatures = aHero.getCreatures();
-        for (int i = 0; i < creatures.size(); i++) {
-            board.put(new Point(aColumnNumber, i * 2 + 1), creatures.get(i));
+    private void putHeroCreaturesToBoard(HeroInBattle aHero, int aColumnNumber) {
+        List<CreatureStack> creatureStacks = aHero.getCreatureStacks();
+        for (int i = 0; i < creatureStacks.size(); i++) {
+            board.put(new Point(aColumnNumber, i * 2 + 1), creatureStacks.get(i));
         }
     }
 
     private void nextCreature() {
-        if(checkEndTurn()){
+        Map.Entry<Point, CreatureStack> previousCreature = activeCreature;
+        if (checkEndTurn()) {
             creaturesQueue.addAll(activatedCreaturesInThisTurn);
             activatedCreaturesInThisTurn.clear();
+            obsSupport.firePropertyChange(END_OF_TURN, null, null);
         }
-        Creature currentCreature = creaturesQueue.poll();
-        activatedCreaturesInThisTurn.add(currentCreature);
-        Point currentPoint = board.getByCreature(currentCreature);
-        activeCreature = new AbstractMap.SimpleEntry<>(currentPoint,currentCreature);
+        CreatureStack currentCreatureStack = creaturesQueue.poll();
+        activatedCreaturesInThisTurn.add(currentCreatureStack);
+        Point currentPoint = board.getByCreature(currentCreatureStack);
+        activeCreature = new AbstractMap.SimpleEntry<>(currentPoint, currentCreatureStack);
+
+        obsSupport.firePropertyChange(ACTIVE_CREATURE_CHANGED, previousCreature, activeCreature);
     }
 
-    private boolean checkEndTurn() {return creaturesQueue.isEmpty();
-    }
-
-    private boolean isMoveRangeEnought(Point aPoint) {
-        return Point.distance(activeCreature.getKey().getX(),activeCreature.getKey().getY(), aPoint.getX(),aPoint.getY()) <= activeCreature.getValue().getMoveRange();
-    }
-
-    private boolean isAttackRangeEnought(Point aPoint) {
-        return Point.distance(activeCreature.getKey().getX(),activeCreature.getKey().getY(), aPoint.getX(),aPoint.getY()) <= activeCreature.getValue().getAttackRange();
-    }
-
-    public void move(int aX, int aY) {
-        if (!isMoveAllowed(new Point(aX, aY))){
-            throw new IllegalArgumentException("To small move range!");
-        }
-
-        board.remove(activeCreature.getKey());
-        board.put(new Point (aX, aY), activeCreature.getValue());
-
-        obsSupport.firePropertyChange(CREATURE_MOVED,null,null);
-    }
-
-    public void registerObserver(String eventType, PropertyChangeListener aObs){
-        obsSupport.addPropertyChangeListener(eventType, aObs);
+    private boolean checkEndTurn() {
+        return creaturesQueue.isEmpty();
     }
 }

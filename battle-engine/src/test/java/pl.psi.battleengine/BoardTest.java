@@ -2,6 +2,8 @@ package pl.psi.battleengine;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import pl.psi.battleengine.creatures.CreatureStack;
+import pl.psi.battleengine.move.MapObstacle;
 
 import java.awt.*;
 
@@ -18,11 +20,11 @@ class BoardTest {
 
     @Test
     void shouldReturnCorrectCreature(){
-        Creature creature = Creature.builder().aName("CORRECT").build();
-        board.put(new Point(0,0), Creature.builder().aName("NOT_CORRECT").build());
-        board.put(new Point(0,1), creature);
+        CreatureStack creatureStack = CreatureStack.builder().aName("CORRECT").build();
+        board.put(new Point(0,0), CreatureStack.builder().aName("NOT_CORRECT").build());
+        board.put(new Point(0,1), creatureStack);
 
-        assertEquals(creature, board.getByPoint(new Point(0,1)));
+        assertEquals(creatureStack, board.getByPoint(new Point(0,1)));
 
     }
 
@@ -41,7 +43,7 @@ class BoardTest {
 
     @Test
     void shouldRecognizeMapTileType(){
-        board.put(new Point(0,0), Creature.builder().aName("CREATURE").build());
+        board.put(new Point(0,0), CreatureStack.builder().aName("CREATURE").build());
         board.put(new Point(0,1), new MapObstacle());
 
         assertEquals("CREATURE",board.getByPoint(new Point(0,0)).getIcon());
@@ -50,7 +52,7 @@ class BoardTest {
 
     @Test
     void shouldThrowExceptionIfyouTryToAddGuiTileToNotEmptyTile(){
-        board.put(new Point(0,0), Creature.builder().aName("CREATURE").build());
+        board.put(new Point(0,0), CreatureStack.builder().aName("CREATURE").build());
 
         assertThrows(IllegalArgumentException.class, () -> {
             board.put(new Point(0,0), new MapObstacle());

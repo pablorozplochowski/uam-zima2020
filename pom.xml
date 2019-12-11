@@ -10,6 +10,7 @@
     <modules>
         <module>battle-engine</module>
         <module>battle-gui</module>
+        <module>economy-engine</module>
     </modules>
     <packaging>pom</packaging>
 

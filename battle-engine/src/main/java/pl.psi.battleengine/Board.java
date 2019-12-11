@@ -1,10 +1,13 @@
 package pl.psi.battleengine;
 
+import pl.psi.battleengine.creatures.CreatureStack;
+import pl.psi.battleengine.move.GuiTileIf;
+
 import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
-class Board {
+public class Board {
 
     private Map<Point,GuiTileIf> board;
     public final static int WIDTH = 14;
@@ -14,7 +17,7 @@ class Board {
         board = new HashMap<>();
     }
 
-    void put(Point aPoint, GuiTileIf aCreature) {
+    public void put(Point aPoint, GuiTileIf aCreature) {
         if (board.containsKey(aPoint)){
             throw new IllegalArgumentException("Tile isn't empty");
         }
@@ -26,20 +29,20 @@ class Board {
         return board.get(aPoint);
     }
 
-    Point getByCreature(Creature aCurrentCreature) {
+    Point getByCreature(CreatureStack aCurrentCreatureStack) {
         for (Map.Entry<Point, GuiTileIf> entry : board.entrySet()) {
-            if (entry.getValue().equals(aCurrentCreature)) {
+            if (entry.getValue().equals(aCurrentCreatureStack)) {
                 return entry.getKey();
             }
         }
-        throw new IllegalArgumentException("Creature is missing in board!");
+        throw new IllegalArgumentException("CreatureStack is missing in board!");
     }
 
-    boolean isEmpty(Point aPoint) {
+    public boolean isEmpty(Point aPoint) {
         return !board.containsKey(aPoint);
     }
 
-    void remove(Point aPoint) {
+    public void remove(Point aPoint) {
         board.remove(aPoint);
     }
 }
