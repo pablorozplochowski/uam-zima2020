@@ -1,8 +1,8 @@
-package pl.psi.battleengine.creatures;
+package pl.psi;
 
 import lombok.Builder;
 
-class CreatureStatistic {
+public class CreatureStatistic {
 
     private final int maxHp;
     private final int defence;

@@ -1,4 +1,4 @@
-package pl.psi.economyengine.hero.gui;
+package pl.psi.gui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -6,7 +6,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import pl.psi.battleengine.BattleEngine;
 import pl.psi.battleengine.creatures.CreatureStack;
-import pl.psi.battleengine.creatures.Hero;
+import pl.psi.battleengine.creatures.HeroInBattle;
 
 import java.awt.Point;
 import java.beans.PropertyChangeEvent;
@@ -23,12 +23,12 @@ public class MainBattleController implements PropertyChangeListener {
 
 
     public MainBattleController() {
-        Hero h1 = new Hero();
+        HeroInBattle h1 = new HeroInBattle();
         h1.addCreature(CreatureStack.builder().aName("h1_1").build());
         h1.addCreature(CreatureStack.builder().aName("h1_2").build());
         h1.addCreature(CreatureStack.builder().aName("h1_3").aMoveRange(5).build());
         h1.addCreature(CreatureStack.builder().aName("h1_4").build());
-        Hero h2 = new Hero();
+        HeroInBattle h2 = new HeroInBattle();
         h2.addCreature(CreatureStack.builder().aName("h2_1").build());
         h2.addCreature(CreatureStack.builder().aName("h2_2").build());
         h2.addCreature(CreatureStack.builder().aName("h2_3").build());

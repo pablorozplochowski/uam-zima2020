@@ -1,4 +1,4 @@
-package pl.psi.economyengine.hero.gui;
+package pl.psi.gui;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

@@ -1,4 +1,4 @@
-package pl.psi.economyengine.hero.gui;
+package pl.psi.gui;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;

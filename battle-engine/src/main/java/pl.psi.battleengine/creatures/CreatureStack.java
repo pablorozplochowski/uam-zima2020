@@ -1,6 +1,7 @@
 package pl.psi.battleengine.creatures;
 
 import lombok.Builder;
+import pl.psi.CreatureStatistic;
 import pl.psi.battleengine.move.GuiTileIf;
 
 public class CreatureStack implements GuiTileIf {

@@ -1,7 +1,8 @@
 package pl.psi.battleengine;
 
+
 import pl.psi.battleengine.creatures.CreatureStack;
-import pl.psi.battleengine.creatures.Hero;
+import pl.psi.battleengine.creatures.HeroInBattle;
 import pl.psi.battleengine.move.GuiTileIf;
 import pl.psi.battleengine.move.MapObstacle;
 
@@ -18,14 +19,14 @@ public class BattleEngine {
 
     public static final String CREATURE_MOVED = "CREATURE_MOVED";
     private final Queue<CreatureStack> creaturesQueue;
-    private Hero hero1;
-    private Hero hero2;
+    private HeroInBattle hero1;
+    private HeroInBattle hero2;
     private Board board;
     private HashMap.Entry<Point, CreatureStack> activeCreature;
     private List<CreatureStack> activatedCreaturesInThisTurn;
     private final PropertyChangeSupport obsSupport;
 
-    public BattleEngine(Hero aHero1, Hero aHero2) {
+    public BattleEngine(HeroInBattle aHero1, HeroInBattle aHero2) {
         hero1 = aHero1;
         hero2 = aHero2;
         board = new Board();
@@ -82,7 +83,7 @@ public class BattleEngine {
         putHeroCreaturesToBoard(hero2, Board.WIDTH);
     }
 
-    private void putHeroCreaturesToBoard(Hero aHero, int aColumnNumber) {
+    private void putHeroCreaturesToBoard(HeroInBattle aHero, int aColumnNumber) {
         List<CreatureStack> creatureStacks = aHero.getCreatureStacks();
         for (int i = 0; i < creatureStacks.size(); i++) {
             board.put(new Point(aColumnNumber, i * 2 + 1), creatureStacks.get(i));

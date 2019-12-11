@@ -2,8 +2,9 @@ package pl.psi.battleengine.creatures;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import pl.psi.battleengine.creatures.CreatureStack;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CreatureStackTest {
 

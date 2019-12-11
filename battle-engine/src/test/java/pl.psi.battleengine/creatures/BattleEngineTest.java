@@ -10,14 +10,14 @@ import java.awt.*;
 
 class BattleEngineTest {
 
-    private Hero hero2;
+    private HeroInBattle hero2;
     private BattleEngine engine;
-    private Hero hero1;
+    private HeroInBattle hero1;
     private CreatureStack highestSpeedCreatureStack;
 
     @BeforeEach
     void init() {
-        hero1 = new Hero();
+        hero1 = new HeroInBattle();
         hero1.addCreature(CreatureStack.builder().aName("C1").aMoveRange(1).build());
         hero1.addCreature(CreatureStack.builder().aName("C2").aMoveRange(2).build());
         hero1.addCreature(CreatureStack.builder().aName("C3").aMoveRange(3).build());
@@ -26,7 +26,7 @@ class BattleEngineTest {
 
         // 14 . 1
         highestSpeedCreatureStack = CreatureStack.builder().aName("C2_5").aMoveRange(15).build();
-        hero2 = new Hero();
+        hero2 = new HeroInBattle();
         hero2.addCreature(CreatureStack.builder().aName("C2_1").aMoveRange(11).build());
         hero2.addCreature(CreatureStack.builder().aName("C2_2").aMoveRange(12).build());
         hero2.addCreature(CreatureStack.builder().aName("C2_3").aMoveRange(13).build());

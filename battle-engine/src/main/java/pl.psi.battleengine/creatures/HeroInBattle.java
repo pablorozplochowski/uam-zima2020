@@ -3,11 +3,11 @@ package pl.psi.battleengine.creatures;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Hero {
+public class HeroInBattle {
 
     private List<CreatureStack> creatureStacks;
 
-    public Hero() {
+    public HeroInBattle() {
         creatureStacks = new ArrayList<>();
     }
 
