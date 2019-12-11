@@ -2,11 +2,21 @@ package pl.psi.battleengine.creatures;
 
 import java.util.ArrayList;
 import java.util.List;
+import pl.psi.Hero;
 
 public class HeroInBattle {
 
-    private List<CreatureStack> creatureStacks;
+    private final List<CreatureStack> creatureStacks;
 
+    public HeroInBattle(Hero aHero){
+        creatureStacks = new ArrayList<>();
+        aHero.getCreatures().forEach( (creature, amount)-> {
+            creatureStacks.add(new CreatureStack(creature, amount));
+        });
+        creatureStacks.add(CreatureStack.builder().build());
+    }
+
+    @Deprecated
     public HeroInBattle() {
         creatureStacks = new ArrayList<>();
     }

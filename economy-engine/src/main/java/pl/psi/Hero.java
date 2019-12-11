@@ -3,7 +3,7 @@ package pl.psi;
 import java.util.HashMap;
 import java.util.Map;
 
-class Hero {
+public class Hero {
 
     //creature + amount
     private Map<CreatureStatistic, Integer> creatures;
@@ -16,4 +16,7 @@ class Hero {
 
     }
 
+    public Map<CreatureStatistic, Integer> getCreatures() {
+        return creatures;
+    }
 }

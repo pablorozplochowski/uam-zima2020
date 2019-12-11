@@ -9,12 +9,18 @@ public class CreatureStack implements GuiTileIf {
 
     private boolean counterAttackedInThisTurn;
     private int currentHp;
+    private int amount;
     private final CreatureStatistic statistic;
 
     @Builder
     public CreatureStack(String aName, int aMaxHp, int aAttack, int aDefence, int aMoveRange) {
         statistic = CreatureStatistic.builder().aName(aName).aMaxHp(aMaxHp).aAttack(aAttack).aDefence(aDefence).aMoveRange(aMoveRange).build();
         currentHp = statistic.getMaxHp();
+    }
+
+    public CreatureStack(CreatureStatistic aStatistic, Integer aAmount) {
+        amount = aAmount;
+        statistic = aStatistic;
     }
 
     void attack(CreatureStack aDefender) {
