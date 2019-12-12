@@ -21,6 +21,10 @@
             <artifactId>lombok</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+        <dependency>
             <groupId>pl.psi</groupId>
             <artifactId>economy-engine</artifactId>
             <version>${project.version}</version>

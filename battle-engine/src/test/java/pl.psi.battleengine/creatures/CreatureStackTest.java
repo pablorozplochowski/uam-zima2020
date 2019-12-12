@@ -1,8 +1,8 @@
 package pl.psi.battleengine.creatures;
 
+import com.google.common.collect.Range;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import pl.psi.battleengine.creatures.CreatureStack;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -16,10 +16,10 @@ class CreatureStackTest {
         centaur = CreatureStack.builder()
                 .aName("centaur")
                 .aMaxHp(10)
-                .aAttack(5)
+                .aAttack(Range.closed(5,10))
                 .aDefence(3)
                 .build();
-        imp = new CreatureStack("imp", 5,2,2, 0);
+        imp = new CreatureStack("imp", 5,Range.closed(2,10),2, 0);
     }
 
     @Test
@@ -56,9 +56,14 @@ class CreatureStackTest {
 
     @Test
     void shooterCouldNotBeCaunterAttacked(){
-        ShootingCreatureStack shooter = new ShootingCreatureStack("centaur",10,5,3, 0);
+        ShootingCreatureStack shooter = new ShootingCreatureStack("centaur",10,Range.closed(5,10),3, 0);
         shooter.attack(imp);
 
         assertEquals(shooter.getMaxHp(), shooter.getCurrentHp());
+    }
+
+    @Test
+    void randomStrategyTest(){
+
     }
 }

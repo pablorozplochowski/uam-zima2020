@@ -1,5 +1,6 @@
 package pl.psi.battleengine.creatures;
 
+import com.google.common.collect.Range;
 import lombok.Builder;
 import pl.psi.CreatureStatistic;
 import pl.psi.battleengine.move.GuiTileIf;
@@ -13,7 +14,7 @@ public class CreatureStack implements GuiTileIf {
     private final CreatureStatistic statistic;
 
     @Builder
-    public CreatureStack(String aName, int aMaxHp, int aAttack, int aDefence, int aMoveRange) {
+    public CreatureStack(String aName, int aMaxHp, Range<Integer> aAttack, int aDefence, int aMoveRange) {
         statistic = CreatureStatistic.builder().aName(aName).aMaxHp(aMaxHp).aAttack(aAttack).aDefence(aDefence).aMoveRange(aMoveRange).build();
         currentHp = statistic.getMaxHp();
     }
