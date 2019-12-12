@@ -28,8 +28,8 @@ public class CreatureStatistic {
         return defence;
     }
 
-    public int getAttack() {
-        return attack.lowerEndpoint();
+    public Range<Integer> getAttack() {
+        return attack;
     }
 
     public String getName() {

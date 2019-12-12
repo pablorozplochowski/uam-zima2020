@@ -68,7 +68,7 @@ public class CreatureStack implements GuiTileIf {
     }
 
     public int getAttack() {
-        return getStatistic().getAttack();
+        return getStatistic().getAttack().lowerEndpoint();
     }
 
     public String getName() {
