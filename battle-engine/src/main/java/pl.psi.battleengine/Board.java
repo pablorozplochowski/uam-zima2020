@@ -56,4 +56,8 @@ public class Board {
     public void remove(Point aPoint) {
         board.remove(aPoint);
     }
+
+    public boolean hasCreature(Point aPoint) {
+        return getCreatureByPoint(aPoint) != null;
+    }
 }

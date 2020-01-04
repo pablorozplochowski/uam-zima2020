@@ -8,6 +8,9 @@ import pl.psi.battleengine.move.GuiTileIf;
 
 import java.awt.*;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+
 class BattleEngineTest {
 
     private HeroInBattle hero2;
@@ -44,11 +47,11 @@ class BattleEngineTest {
         GuiTileIf result4 = engine.getByPoint(new Point(0, 7));
         GuiTileIf result5 = engine.getByPoint(new Point(0, 9));
 
-        Assertions.assertEquals("C1", result1.getIcon());
-        Assertions.assertEquals("C2", result2.getIcon());
-        Assertions.assertEquals("C3", result3.getIcon());
-        Assertions.assertEquals("C4", result4.getIcon());
-        Assertions.assertEquals("C5", result5.getIcon());
+        assertTrue(result1.getIcon().contains("C1"));
+        assertTrue(result2.getIcon().contains("C2"));
+        assertTrue(result3.getIcon().contains("C3"));
+        assertTrue(result4.getIcon().contains("C4"));
+        assertTrue(result5.getIcon().contains("C5"));
 
         GuiTileIf result21 = engine.getByPoint(new Point(BattleEngine.WIDTH, 1));
         GuiTileIf result22 = engine.getByPoint(new Point(BattleEngine.WIDTH, 3));
@@ -56,11 +59,11 @@ class BattleEngineTest {
         GuiTileIf result24 = engine.getByPoint(new Point(BattleEngine.WIDTH, 7));
         GuiTileIf result25 = engine.getByPoint(new Point(BattleEngine.WIDTH, 9));
 
-        Assertions.assertEquals("C2_1", result21.getIcon());
-        Assertions.assertEquals("C2_2", result22.getIcon());
-        Assertions.assertEquals("C2_3", result23.getIcon());
-        Assertions.assertEquals("C2_4", result24.getIcon());
-        Assertions.assertEquals("C2_5", result25.getIcon());
+        assertTrue(result21.getIcon().contains("C2_1"));
+        assertTrue(result22.getIcon().contains("C2_2"));
+        assertTrue(result23.getIcon().contains("C2_3"));
+        assertTrue(result24.getIcon().contains("C2_4"));
+        assertTrue(result25.getIcon().contains("C2_5"));
     }
 
     @Test
@@ -98,7 +101,7 @@ class BattleEngineTest {
 
     @Test
     void moveShouldBeAllowWhileTileIsEmpty(){
-        Assertions.assertTrue(engine.isMoveAllowed(new Point(10,10)));
+        assertTrue(engine.isMoveAllowed(new Point(10,10)));
     }
 
     @Test
@@ -115,16 +118,16 @@ class BattleEngineTest {
         engine.pass();
         //pass for creature with 5 moveRange in position (0, 9)
 
-        Assertions.assertTrue(engine.isMoveAllowed(new Point(5,9)));
+        assertTrue(engine.isMoveAllowed(new Point(5,9)));
         Assertions.assertFalse(engine.isMoveAllowed(new Point(6,9)));
 
-        Assertions.assertTrue(engine.isMoveAllowed(new Point(0,4)));
+        assertTrue(engine.isMoveAllowed(new Point(0,4)));
         Assertions.assertFalse(engine.isMoveAllowed(new Point(0,3)));
 
-        Assertions.assertTrue(engine.isMoveAllowed(new Point(2,5)));
+        assertTrue(engine.isMoveAllowed(new Point(2,5)));
         Assertions.assertFalse(engine.isMoveAllowed(new Point(2,4)));
 
-        Assertions.assertTrue(engine.isMoveAllowed(new Point(0,4)));
+        assertTrue(engine.isMoveAllowed(new Point(0,4)));
         Assertions.assertFalse(engine.isMoveAllowed(new Point(1,4)));
     }
 

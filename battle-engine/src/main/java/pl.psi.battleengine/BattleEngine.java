@@ -81,10 +81,17 @@ public class BattleEngine {
     public void move(int aX, int aY) {
         moveEngine.move(aX, aY);
         obsSupport.firePropertyChange(CREATURE_MOVED, null, null);
+        Map.Entry<Point, CreatureStack> oldCreature = activeCreature;
+        activeCreature = new AbstractMap.SimpleEntry<>(new Point(aX,aY), activeCreature.getValue());
+        obsSupport.firePropertyChange(ACTIVE_CREATURE_CHANGED, oldCreature, activeCreature);
     }
 
     public void registerObserver(String eventType, PropertyChangeListener aObs) {
         obsSupport.addPropertyChangeListener(eventType, aObs);
+    }
+
+    public void registerObserver(PropertyChangeListener aObs) {
+        obsSupport.addPropertyChangeListener(aObs);
     }
 
     public boolean isAttackAllowed(Point aPoint) {
@@ -93,6 +100,7 @@ public class BattleEngine {
 
     public void attack(Point aPoint) {
         attackingEngine.attack(aPoint);
+        pass();
     }
 
     private void initQueue() {

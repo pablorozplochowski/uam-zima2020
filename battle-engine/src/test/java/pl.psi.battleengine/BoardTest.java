@@ -46,7 +46,7 @@ class BoardTest {
         board.put(new Point(0,0), CreatureStack.builder().aName("CREATURE").build());
         board.put(new Point(0,1), new MapObstacle());
 
-        assertEquals("CREATURE",board.getByPoint(new Point(0,0)).getIcon());
+        assertTrue(board.getByPoint(new Point(0,0)).getIcon().contains("CREATURE"));
         assertEquals("X",board.getByPoint(new Point(0,1)).getIcon());
     }
 

@@ -75,8 +75,20 @@ public class CreatureStack implements GuiTileIf {
         return getStatistic().getMoveRange();
     }
 
+    int getAmount() {
+        return amount;
+    }
+
     @Override
     public String getIcon() {
-        return getStatistic().getName();
+        StringBuilder sb = new StringBuilder(getName());
+        sb.append(System.lineSeparator());
+        sb.append("  ");
+        sb.append(getAmount());
+        sb.append(System.lineSeparator());
+        sb.append(getCurrentHp());
+        sb.append(" / ");
+        sb.append(getMaxHp());
+        return sb.toString();
     }
 }
