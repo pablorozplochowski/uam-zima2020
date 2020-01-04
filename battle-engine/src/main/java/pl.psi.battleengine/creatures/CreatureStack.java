@@ -18,6 +18,7 @@ public class CreatureStack implements GuiTileIf {
     private final CreatureStatistic statistic;
     private DealDamageStrategyIf dealDamageStrategy;
     private List<Spell> spells;
+    private StatisticBuffs buffs;
 
     @Builder
     public CreatureStack(String aName, int aMaxHp, Range<Integer> aAttack, int aDefence, int aMoveRange) {
@@ -25,6 +26,7 @@ public class CreatureStack implements GuiTileIf {
         currentHp = statistic.getMaxHp();
         dealDamageStrategy = new DefaultDamageStrategy();
         spells = new Vector<Spell>();
+        buffs = new StatisticBuffs();
     }
 
     public CreatureStack(CreatureStatistic aStatistic, Integer aAmount) {
@@ -62,15 +64,15 @@ public class CreatureStack implements GuiTileIf {
     }
 
     public int getMaxHp() {
-        return getStatistic().getMaxHp();
+        return getStatistic().getMaxHp() + buffs.maxHp;
     }
 
     public int getDefence() {
-        return getStatistic().getDefence();
+        return getStatistic().getDefence() + buffs.defence;
     }
 
     public Range<Integer> getAttack() {
-        return getStatistic().getAttack();
+        return Range.closed(getStatistic().getAttack().lowerEndpoint() + buffs.attack.lowerEndpoint(), getStatistic().getAttack().upperEndpoint() + buffs.attack.upperEndpoint());
     }
 
     public String getName() {
@@ -78,7 +80,7 @@ public class CreatureStack implements GuiTileIf {
     }
 
     public int getMoveRange() {
-        return getStatistic().getMoveRange();
+        return getStatistic().getMoveRange() + buffs.moveRange;
     }
 
     int getAmount() {
