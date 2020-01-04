@@ -24,15 +24,15 @@ public class MainBattleController implements PropertyChangeListener {
 
     public MainBattleController() {
         HeroInBattle h1 = new HeroInBattle();
-        h1.addCreature(CreatureStack.builder().aName("h1_1").build());
-        h1.addCreature(CreatureStack.builder().aName("h1_2").build());
+        h1.addCreature(CreatureStack.builder().aName("h1_1").aMoveRange(7).build());
+        h1.addCreature(CreatureStack.builder().aName("h1_2").aMoveRange(3).build());
         h1.addCreature(CreatureStack.builder().aName("h1_3").aMoveRange(5).build());
-        h1.addCreature(CreatureStack.builder().aName("h1_4").build());
+        h1.addCreature(CreatureStack.builder().aName("h1_4").aMoveRange(11).build());
         HeroInBattle h2 = new HeroInBattle();
-        h2.addCreature(CreatureStack.builder().aName("h2_1").build());
-        h2.addCreature(CreatureStack.builder().aName("h2_2").build());
-        h2.addCreature(CreatureStack.builder().aName("h2_3").build());
-        h2.addCreature(CreatureStack.builder().aName("h2_4").build());
+        h2.addCreature(CreatureStack.builder().aName("h2_1").aMoveRange(9).build());
+        h2.addCreature(CreatureStack.builder().aName("h2_2").aMoveRange(4).build());
+        h2.addCreature(CreatureStack.builder().aName("h2_3").aMoveRange(8).build());
+        h2.addCreature(CreatureStack.builder().aName("h2_4").aMoveRange(2).build());
         engine = new BattleEngine(h1,h2);
     }
 
@@ -71,6 +71,10 @@ public class MainBattleController implements PropertyChangeListener {
 
         if(engine.isMoveAllowed(new Point (aX, aY))){
             tileFactory = new MovePossibleTileFactoryDecorator(tileFactory, new Point(aX, aY),engine);
+        }
+
+        if(engine.isAttackAllowed(new Point (aX, aY))){
+            tileFactory = new AttackPossibleTileFactoryDecorator(tileFactory, new Point(aX, aY),engine);
         }
 
         tile = tileFactory.generateTile();

@@ -8,7 +8,7 @@ public class ShootingCreatureStack extends CreatureStack {
     }
 
     @Override
-    void attack(CreatureStack aDefender) {
+    public void attack(CreatureStack aDefender) {
         dealDamage(aDefender);
     }
 }

@@ -20,7 +20,14 @@ public class AttackingEngine implements PropertyChangeListener {
     }
 
     public boolean isAttackAllowed(Point aPoint) {
+        if (activeCreature.getKey().equals(aPoint)){
+            return false;
+        }
         return isAttackRangeEnought(aPoint) && !board.isEmpty(aPoint);
+    }
+
+    public void attack(Point aPoint){
+        activeCreature.getValue().attack(board.getCreatureByPoint(aPoint));
     }
 
     private boolean isAttackRangeEnought(Point aPoint) {

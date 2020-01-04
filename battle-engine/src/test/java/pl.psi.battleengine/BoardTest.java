@@ -59,4 +59,20 @@ class BoardTest {
         });
     }
 
+    @Test
+    void shouldThrowExceptionWhileYouTryingToGetCreatureFromEmptyField(){
+        assertThrows(IllegalArgumentException.class, () -> {
+            board.getCreatureByPoint(new Point(0,0));
+        });
+    }
+
+    @Test
+    void shouldThrowExceptionWhileYouAreTryingToGetCratureFromNotCreatureObstacleExample(){
+        board.put(new Point(0,0), new MapObstacle());
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            board.getCreatureByPoint(new Point(0,0));
+        });
+    }
+
 }

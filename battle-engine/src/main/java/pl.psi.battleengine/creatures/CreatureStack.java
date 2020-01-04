@@ -26,7 +26,7 @@ public class CreatureStack implements GuiTileIf {
         statistic = aStatistic;
     }
 
-    void attack(CreatureStack aDefender) {
+    public void attack(CreatureStack aDefender) {
         dealDamage(aDefender);
         aDefender.counterAttack(this);
     }

@@ -29,6 +29,17 @@ public class Board {
         return board.get(aPoint);
     }
 
+    public CreatureStack getCreatureByPoint(Point aPoint) {
+        GuiTileIf potencialCreature = board.get(aPoint);
+        if (potencialCreature == null){
+            throw new IllegalArgumentException("Field is empty");
+        }
+        else if (!(potencialCreature instanceof CreatureStack)){
+            throw new IllegalArgumentException("Is not a creature");
+        }
+        return (CreatureStack) board.get(aPoint);
+    }
+
     Point getByCreature(CreatureStack aCurrentCreatureStack) {
         for (Map.Entry<Point, GuiTileIf> entry : board.entrySet()) {
             if (entry.getValue().equals(aCurrentCreatureStack)) {

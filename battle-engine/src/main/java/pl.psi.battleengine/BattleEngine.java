@@ -91,6 +91,10 @@ public class BattleEngine {
         return attackingEngine.isAttackAllowed(aPoint);
     }
 
+    public void attack(Point aPoint) {
+        attackingEngine.attack(aPoint);
+    }
+
     private void initQueue() {
         List<CreatureStack> creatureStacks = hero1.getCreatureStacks();
         creatureStacks.addAll(hero2.getCreatureStacks());
@@ -129,4 +133,5 @@ public class BattleEngine {
     private boolean checkEndTurn() {
         return creaturesQueue.isEmpty();
     }
+
 }
