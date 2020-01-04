@@ -4,6 +4,7 @@ import com.google.common.collect.Range;
 import lombok.Builder;
 import pl.psi.CreatureStatistic;
 import pl.psi.battleengine.move.GuiTileIf;
+import pl.psi.battleengine.spellbook.Spell;
 
 import java.util.List;
 import java.util.Vector;
@@ -16,14 +17,14 @@ public class CreatureStack implements GuiTileIf {
     private int amount;
     private final CreatureStatistic statistic;
     private DealDamageStrategyIf dealDamageStrategy;
-    private List<SpellIf> spells;
+    private List<Spell> spells;
 
     @Builder
     public CreatureStack(String aName, int aMaxHp, Range<Integer> aAttack, int aDefence, int aMoveRange) {
         statistic = CreatureStatistic.builder().aName(aName).aMaxHp(aMaxHp).aAttack(aAttack).aDefence(aDefence).aMoveRange(aMoveRange).build();
         currentHp = statistic.getMaxHp();
         dealDamageStrategy = new DefaultDamageStrategy();
-        spells = new Vector<SpellIf>();
+        spells = new Vector<Spell>();
     }
 
     public CreatureStack(CreatureStatistic aStatistic, Integer aAmount) {
