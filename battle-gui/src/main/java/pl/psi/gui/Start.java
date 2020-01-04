@@ -23,7 +23,7 @@ public class Start extends Application {
             Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("main-battle.fxml"));
             Scene scene = new Scene(root);
 
-            primaryStage.setTitle("Hello students!");
+            primaryStage.setTitle("Heroes 3");
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (IOException aE) {

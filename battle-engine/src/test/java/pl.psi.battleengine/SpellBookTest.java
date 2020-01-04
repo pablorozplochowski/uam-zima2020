@@ -30,7 +30,7 @@ class SpellBookTest {
         // before buff
         assertEquals(2, imp.getAttack().lowerEndpoint());
         // after buff
-        //imp.addSpell(new BuffAttackSpell());
-        //assertEquals(4, imp.getAttack().lowerEndpoint());
+
+        assertEquals(4, imp.getAttack().lowerEndpoint());
     }
 }
