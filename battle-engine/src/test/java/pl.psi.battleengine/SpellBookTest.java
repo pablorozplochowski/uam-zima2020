@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pl.psi.battleengine.creatures.CreatureStack;
 import pl.psi.battleengine.spellbook.AttackBuff;
+import pl.psi.battleengine.spellbook.DeffenceBuff;
 import pl.psi.battleengine.spellbook.Effects;
 import pl.psi.battleengine.spellbook.Spell;
 
@@ -33,9 +34,28 @@ class SpellBookTest {
     void ImpShouldHaveAttackIncreased(){
         // before buff
         assertEquals(2, imp.getAttack().lowerEndpoint());
-        // after buff
+        assertEquals(10, imp.getAttack().upperEndpoint());
+
         Spell spell = new Spell("test_attack", new LinkedList<Effects>(Arrays.asList(new Effects(2,99, new AttackBuff()))));
         spell.execute(imp);
+        // after buff
         assertEquals(4, imp.getAttack().lowerEndpoint());
+        assertEquals(12, imp.getAttack().upperEndpoint());
+    }
+
+    @Test
+    void ImpShouldHaveDefenceAndAttackIncreased(){
+        // before buff
+        assertEquals(2, imp.getAttack().lowerEndpoint());
+        assertEquals(10, imp.getAttack().upperEndpoint());
+        assertEquals(2, imp.getDefence());
+
+        Spell spell = new Spell("test_attack_and_Defence", new LinkedList<Effects>(Arrays.asList(new Effects(5,99, new DeffenceBuff()),
+                new Effects(2,99, new AttackBuff()))));
+        spell.execute(imp);
+        // after buff
+        assertEquals(4, imp.getAttack().lowerEndpoint());
+        assertEquals(12, imp.getAttack().upperEndpoint());
+        assertEquals(7, imp.getDefence());
     }
 }
