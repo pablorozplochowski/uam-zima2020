@@ -8,16 +8,18 @@ public class CreatureStatistic {
     private final int maxHp;
     private final int defence;
     private final Range<Integer> attack;
+    private final Range<Integer> heal;
     private final String name;
     private final int moveRange;
 
     @Builder
-    CreatureStatistic(int aMaxHp, int aDefence, Range<Integer> aAttack, String aName, int aMoveRange) {
+    CreatureStatistic(int aMaxHp, int aDefence, Range<Integer> aAttack, String aName, int aMoveRange, Range<Integer> aHeal) {
         maxHp = aMaxHp;
         defence = aDefence;
         attack = aAttack;
         name = aName;
         moveRange = aMoveRange;
+        heal = aHeal;
     }
 
     public int getMaxHp() {
@@ -30,6 +32,10 @@ public class CreatureStatistic {
 
     public Range<Integer> getAttack() {
         return attack;
+    }
+
+    public Range<Integer> getHeal() {
+        return heal;
     }
 
     public String getName() {

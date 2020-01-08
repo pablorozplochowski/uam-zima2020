@@ -15,10 +15,10 @@ public class CreatureStack implements GuiTileIf {
     private DealDamageStrategyIf dealDamageStrategy;
 
     @Builder
-    public CreatureStack(String aName, int aMaxHp, Range<Integer> aAttack, int aDefence, int aMoveRange) {
-        statistic = CreatureStatistic.builder().aName(aName).aMaxHp(aMaxHp).aAttack(aAttack).aDefence(aDefence).aMoveRange(aMoveRange).build();
+    public CreatureStack(String aName, int aMaxHp, Range<Integer> aAttack, int aDefence, int aMoveRange, Range<Integer> aHeal, DealDamageStrategyIf aStrategy) {
+        statistic = CreatureStatistic.builder().aName(aName).aMaxHp(aMaxHp).aAttack(aAttack).aDefence(aDefence).aMoveRange(aMoveRange).aHeal(aHeal).build();
         currentHp = statistic.getMaxHp();
-        dealDamageStrategy = new DefaultDamageStrategy();
+        dealDamageStrategy = aStrategy;
     }
 
     public CreatureStack(CreatureStatistic aStatistic, Integer aAmount) {
@@ -43,6 +43,19 @@ public class CreatureStack implements GuiTileIf {
         aDefender.currentHp -= damage;
     }
 
+    public void heal(CreatureStack aPatient) {
+        healDamage(aPatient);
+    }
+
+    protected void healDamage(CreatureStack aPatient) {
+        //int damage = HealDamageStrategy.dealDamage(this, aPatient);
+        //aPatient.currentHp += damage;
+    }
+
+    public void gainLife(int damage){
+        this.currentHp += damage;
+    }
+
     public int getCurrentHp() {
         return currentHp;
     }
@@ -65,6 +78,10 @@ public class CreatureStack implements GuiTileIf {
 
     public Range<Integer> getAttack() {
         return getStatistic().getAttack();
+    }
+
+    public Range<Integer> getHeal() {
+        return getStatistic().getHeal();
     }
 
     public String getName() {
