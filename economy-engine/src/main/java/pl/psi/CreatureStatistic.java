@@ -39,4 +39,9 @@ public class CreatureStatistic {
     public int getMoveRange() {
         return moveRange;
     }
+
+    public void testPush(){
+        int i = 0;
+        i++;
+    }
 }
