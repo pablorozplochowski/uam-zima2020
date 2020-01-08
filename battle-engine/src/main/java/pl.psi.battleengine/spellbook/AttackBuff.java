@@ -5,7 +5,7 @@ import pl.psi.battleengine.creatures.CreatureStack;
 
 public class AttackBuff implements Mechanics {
     @Override
-    public int buff(CreatureStack aCaster, CreatureStack aTarget, int value) {
-        return 2;
+    public void buff(CreatureStack aCaster, CreatureStack aTarget, int value) {
+        aTarget.buffs.attack = Range.closed(aTarget.buffs.attack.lowerEndpoint() + value, aTarget.buffs.attack.upperEndpoint() + value);
     }
 }

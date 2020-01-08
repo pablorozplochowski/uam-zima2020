@@ -4,10 +4,14 @@ import com.google.common.collect.Range;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pl.psi.battleengine.creatures.CreatureStack;
-import pl.psi.battleengine.spellbook.BuffAttackSpell;
+import pl.psi.battleengine.spellbook.AttackBuff;
+import pl.psi.battleengine.spellbook.Effects;
+import pl.psi.battleengine.spellbook.Spell;
 
+import java.util.Arrays;
+import java.util.LinkedList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class SpellBookTest {
 
@@ -30,7 +34,8 @@ class SpellBookTest {
         // before buff
         assertEquals(2, imp.getAttack().lowerEndpoint());
         // after buff
-
+        Spell spell = new Spell("test_attack", new LinkedList<Effects>(Arrays.asList(new Effects(2,99, new AttackBuff()))));
+        spell.execute(imp);
         assertEquals(4, imp.getAttack().lowerEndpoint());
     }
 }

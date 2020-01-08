@@ -18,7 +18,7 @@ public class CreatureStack implements GuiTileIf {
     private final CreatureStatistic statistic;
     private DealDamageStrategyIf dealDamageStrategy;
     private List<Spell> spells;
-    private StatisticBuffs buffs;
+    public StatisticBuffs buffs;
 
     @Builder
     public CreatureStack(String aName, int aMaxHp, Range<Integer> aAttack, int aDefence, int aMoveRange) {
