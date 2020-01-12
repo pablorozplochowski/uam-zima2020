@@ -2,6 +2,8 @@ package pl.psi.battleengine.creatures;
 
 import com.google.common.collect.Range;
 import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 import pl.psi.CreatureStatistic;
 import pl.psi.battleengine.move.GuiTileIf;
 import pl.psi.battleengine.spellbook.Spell;
@@ -11,14 +13,13 @@ import java.util.Vector;
 
 public class CreatureStack implements GuiTileIf {
 
-
     private boolean counterAttackedInThisTurn;
     private int currentHp;
     private int amount;
     private final CreatureStatistic statistic;
     private DealDamageStrategyIf dealDamageStrategy;
+    @Getter
     private List<Spell> spells;
-    private StatisticBuffs buffs;
 
     @Builder
     public CreatureStack(String aName, int aMaxHp, Range<Integer> aAttack, int aDefence, int aMoveRange) {
@@ -26,7 +27,6 @@ public class CreatureStack implements GuiTileIf {
         currentHp = statistic.getMaxHp();
         dealDamageStrategy = new DefaultDamageStrategy();
         spells = new Vector<Spell>();
-        buffs = new StatisticBuffs();
     }
 
     public CreatureStack(CreatureStatistic aStatistic, Integer aAmount) {
@@ -59,22 +59,29 @@ public class CreatureStack implements GuiTileIf {
         return statistic;
     }
 
-    public StatisticBuffs getBuffs() { return buffs; }
-
     public double getAttackRange() {
         return 1.0;
     }
 
     public int getMaxHp() {
-        return getStatistic().getMaxHp() + getBuffs().maxHp;
+        int buff = 0;
+        for(Spell spell : spells) buff += spell.getBuffs().getMaxHp();
+        return getStatistic().getMaxHp() + buff;
     }
 
     public int getDefence() {
-        return getStatistic().getDefence() + getBuffs().defence;
+        int buff = 0;
+        for(Spell spell : spells) buff += spell.getBuffs().getDefence();
+        return getStatistic().getDefence() + buff;
     }
 
     public Range<Integer> getAttack() {
-        return Range.closed(getStatistic().getAttack().lowerEndpoint() + getBuffs().attack.lowerEndpoint(), getStatistic().getAttack().upperEndpoint() + getBuffs().attack.upperEndpoint());
+        int lowerBuff = 0, upperBuff = 0;
+        for(Spell spell : spells) {
+            lowerBuff  += spell.getBuffs().getAttack().lowerEndpoint();
+            upperBuff += spell.getBuffs().getAttack().upperEndpoint();
+        }
+        return Range.closed(getStatistic().getAttack().lowerEndpoint() + lowerBuff, getStatistic().getAttack().upperEndpoint() + upperBuff);
     }
 
     public String getName() {
@@ -82,7 +89,9 @@ public class CreatureStack implements GuiTileIf {
     }
 
     public int getMoveRange() {
-        return getStatistic().getMoveRange() + getBuffs().moveRange;
+        int buff = 0;
+        for(Spell spell : spells) buff += spell.getBuffs().getMoveRange();
+        return getStatistic().getMoveRange() + buff;
     }
 
     int getAmount() {
