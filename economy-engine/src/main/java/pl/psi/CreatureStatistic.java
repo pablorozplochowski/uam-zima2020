@@ -13,7 +13,7 @@ public class CreatureStatistic {
     private final int moveRange;
 
     @Builder
-    CreatureStatistic(int aMaxHp, int aDefence, Range<Integer> aAttack, String aName, int aMoveRange, Range<Integer> aHeal) {
+    public CreatureStatistic(int aMaxHp, int aDefence, Range<Integer> aAttack, String aName, int aMoveRange, Range<Integer> aHeal) {
         maxHp = aMaxHp;
         defence = aDefence;
         attack = aAttack;

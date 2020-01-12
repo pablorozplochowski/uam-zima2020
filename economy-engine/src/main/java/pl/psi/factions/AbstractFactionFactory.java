@@ -1,4 +1,6 @@
-package pl.psi;
+package pl.psi.factions;
+
+import pl.psi.CreatureStatistic;
 
 abstract class AbstractFactionFactory {
     public static AbstractFactionFactory getFactory(String aFractionName) throws IllegalArgumentException {
@@ -6,7 +8,11 @@ abstract class AbstractFactionFactory {
             AbstractFactionFactory infernoFactory = new InfernoFactory();
             return infernoFactory;
         }
-        else throw new IllegalArgumentException("There is no faction with this name");
+
+        if (aFractionName.equals("NECROPOLIS")) {
+            AbstractFactionFactory necropolisFactory = new NecropolisFactory();
+            return necropolisFactory;
+        } else throw new IllegalArgumentException("There is no faction with this name");
     }
 
     public abstract CreatureStatistic createByTier(int aTier);
