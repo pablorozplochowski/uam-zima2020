@@ -16,11 +16,11 @@ public class NecropolisFactory extends AbstractFactionFactory {
             return zombie;
         }
         if (aTier == 3) {
-            CreatureStatistic vampyr = new CreatureStatistic(20, 5, Range.closed(3, 5), "Vampyr", 7, Range.closed(2, 5));
+            CreatureStatistic vampyr = new CreatureStatistic(20, 5, Range.closed(3, 5), "Vampyr", 7, Range.closed(0, 0));
             return vampyr;
         }
         if (aTier == 4) {
-            CreatureStatistic necromancer = new CreatureStatistic(30, 9, Range.closed(5, 8), "Necromancer", 5, Range.closed(5, 8));
+            CreatureStatistic necromancer = new CreatureStatistic(30, 9, Range.closed(5, 8), "Necromancer", 5, Range.closed(0, 0));
             return necromancer;
         }
         if (aTier == 5) {
@@ -28,7 +28,7 @@ public class NecropolisFactory extends AbstractFactionFactory {
             return meatWagon;
         }
         if (aTier == 6) {
-            CreatureStatistic lich = new CreatureStatistic(120, 16, Range.closed(15, 30), "Lich", 7, Range.closed(10, 20));
+            CreatureStatistic lich = new CreatureStatistic(120, 16, Range.closed(15, 30), "Lich", 7, Range.closed(0, 0));
             return lich;
         }
         if (aTier == 7) {
