@@ -55,6 +55,8 @@ public class CreatureStack implements GuiTileIf {
         return currentHp;
     }
 
+    public void setCurrentHp(int aCurrentHp) { currentHp = aCurrentHp;}
+
     public CreatureStatistic getStatistic() {
         return statistic;
     }

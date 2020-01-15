@@ -4,8 +4,7 @@ import com.google.common.collect.Range;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pl.psi.battleengine.creatures.CreatureStack;
-import pl.psi.battleengine.spellbook.AttackBuffSpell;
-import pl.psi.battleengine.spellbook.Spell;
+import pl.psi.battleengine.spellbook.*;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -41,15 +40,39 @@ class SpellBookTest {
     }
 
     @Test
-    void ImpShouldHaveDefenceAndAttackIncreased(){
+    void ImpShouldHaveCurrentHpDecreased(){
         // before buff
-        assertEquals(2, imp.getAttack().lowerEndpoint());
-        assertEquals(10, imp.getAttack().upperEndpoint());
-        assertEquals(2, imp.getDefence());
+        assertEquals(5, imp.getCurrentHp());
 
+        Spell spell = new DealDamageSpell("test_damage", 4);
+        spell.buff(imp);
         // after buff
-        //assertEquals(4, imp.getAttack().lowerEndpoint());
-        //assertEquals(12, imp.getAttack().upperEndpoint());
-        //assertEquals(7, imp.getDefence());
+        assertEquals(1, imp.getCurrentHp());
+    }
+
+    @Test
+    void ImpShouldHaveCurrentHpDecreasedAndMaHpIncreased(){
+        // before buff
+        assertEquals(5, imp.getMaxHp());
+        assertEquals(5, imp.getCurrentHp());
+
+        Spell spell = new DealDamageAndIncreaseMaxHpSpell("test_damage_and_maxHp", 4, 3);
+        spell.buff(imp);
+        // after buff
+        assertEquals(8, imp.getMaxHp());
+        assertEquals(1, imp.getCurrentHp());
+    }
+
+    @Test
+    void ImpShouldHaveDefenceAndMoveRangeIncreased(){
+        // before buff
+        assertEquals(2, imp.getDefence());
+        assertEquals(0, imp.getMoveRange());
+
+        Spell spell = new DefenceAndMoveRangeBuffSpell("test_defence_and_moveRange", 1, 7);
+        spell.buff(imp);
+        // after buff
+        assertEquals(3, imp.getDefence());
+        assertEquals(7, imp.getMoveRange());
     }
 }

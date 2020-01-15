@@ -8,4 +8,6 @@ public class AttackBuffSpell extends Spell {
         super(aName);
         buffs.setAttack(Range.closed(aLowerAttack, aUpperAttack));
     }
+
+
 }
