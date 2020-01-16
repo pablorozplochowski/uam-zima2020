@@ -1,19 +1,22 @@
 package pl.psi.battleengine.spellbook;
 
-import com.google.common.collect.Range;
 import pl.psi.battleengine.creatures.CreatureStack;
 
-public class DealDamageAndIncreaseMaxHpSpell extends Spell{
+public class DealDamageAndIncreaseMaxHpSpell extends Spell {
     int damage;
     public DealDamageAndIncreaseMaxHpSpell(String aName, int aDamage, int aMaxHp){
         super(aName);
         damage = aDamage;
-        buffs.setMaxHp(aMaxHp);
+//        buffs.setMaxHp(aMaxHp);
+    }
+
+    public void buff(CreatureStack aTarget){
+//        aTarget.getSpells().add(this);
+        aTarget.setCurrentHp(aTarget.getCurrentHp() - damage);
     }
 
     @Override
-    public void buff(CreatureStack aTarget){
-        aTarget.getSpells().add(this);
-        aTarget.setCurrentHp(aTarget.getCurrentHp() - damage);
+    public void cast(CreatureStack aTarget) {
+
     }
 }

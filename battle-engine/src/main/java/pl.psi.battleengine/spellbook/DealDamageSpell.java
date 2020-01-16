@@ -10,7 +10,7 @@ public class DealDamageSpell extends Spell {
     }
 
     @Override
-    public void buff(CreatureStack aTarget){
+    public void cast(CreatureStack aTarget) {
         aTarget.setCurrentHp(aTarget.getCurrentHp() - damage);
     }
 }

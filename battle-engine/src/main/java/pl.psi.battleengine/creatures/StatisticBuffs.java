@@ -12,7 +12,6 @@ public class StatisticBuffs {
     @Getter @Setter private Range<Integer> attack;
     @Getter @Setter private int moveRange;
 
-    @Builder
     public StatisticBuffs() {
         maxHp = 0;
         defence = 0;
@@ -20,6 +19,7 @@ public class StatisticBuffs {
         moveRange = 0;
     }
 
+    @Builder
     public StatisticBuffs(int aMaxHp, int aDefence, Range aAttack, int aMoveRange) {
         maxHp = aMaxHp;
         defence = aDefence;
