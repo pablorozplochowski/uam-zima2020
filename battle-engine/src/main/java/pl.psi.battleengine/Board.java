@@ -5,6 +5,7 @@ import pl.psi.battleengine.move.GuiTileIf;
 
 import java.awt.*;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 
 public class Board {
@@ -24,9 +25,23 @@ public class Board {
         board.put(aPoint,aCreature);
     }
 
-
     GuiTileIf getByPoint(Point aPoint) {
         return board.get(aPoint);
+    }
+
+
+    public void removeTiles(LinkedList<CreatureStack> creatures){
+
+        LinkedList<Point> toBeRemoved = new LinkedList<Point>();
+
+        for(Map.Entry<Point, GuiTileIf> entry : board.entrySet()){
+
+            if(creatures.contains(entry.getValue())) toBeRemoved.add(entry.getKey());
+
+        }
+
+        for(Point point : toBeRemoved) board.remove(point);
+
     }
 
     public CreatureStack getCreatureByPoint(Point aPoint) {

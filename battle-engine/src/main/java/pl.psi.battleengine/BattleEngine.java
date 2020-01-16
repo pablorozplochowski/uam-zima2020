@@ -71,7 +71,14 @@ public class BattleEngine {
     }
 
     public void pass() {
+
+        List<CreatureStack> toBeRemoved = hero1.removeDeadCreatures();
+        toBeRemoved.addAll(hero2.removeDeadCreatures());
+        creaturesQueue.removeAll(toBeRemoved);
+        activatedCreaturesInThisTurn.removeAll(toBeRemoved);
+        board.removeTiles((LinkedList<CreatureStack>)toBeRemoved);
         nextCreature();
+
     }
 
     public boolean isMoveAllowed(Point aPoint) {
