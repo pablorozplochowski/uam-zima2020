@@ -2,7 +2,7 @@ package pl.psi.factions;
 
 import pl.psi.CreatureStatistic;
 
-abstract class AbstractFactionFactory {
+public abstract class AbstractFactionFactory {
     public static AbstractFactionFactory getFactory(String aFractionName) throws IllegalArgumentException {
         if (aFractionName.equals("INFERNO")) {
             AbstractFactionFactory infernoFactory = new InfernoFactory();

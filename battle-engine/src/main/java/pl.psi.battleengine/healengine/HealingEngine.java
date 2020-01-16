@@ -20,7 +20,7 @@ public class HealingEngine implements PropertyChangeListener {
     }
 
     public boolean isHealAllowed(Point aPoint) {
-        if (activeCreature.getValue().getHeal().upperEndpoint() <= 0){
+        if ( activeCreature.getValue().getHeal().upperEndpoint() <= 0){
             return false;
         }
         return isHealRangeEnought(aPoint) && !board.isEmpty(aPoint);

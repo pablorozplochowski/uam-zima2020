@@ -24,6 +24,7 @@ public class CreatureStack implements GuiTileIf {
     public CreatureStack(CreatureStatistic aStatistic, Integer aAmount) {
         amount = aAmount;
         statistic = aStatistic;
+        currentHp = statistic.getMaxHp();
     }
 
     public void attack(CreatureStack aDefender) {
@@ -44,7 +45,11 @@ public class CreatureStack implements GuiTileIf {
     }
 
     public void heal(CreatureStack aPatient) {
-        healDamage(aPatient);
+        throw new UnsupportedOperationException("Only HealingCreatureStack can use this method");
+    }
+
+    public void isHealAllow(){
+
     }
 
     protected void healDamage(CreatureStack aPatient) {

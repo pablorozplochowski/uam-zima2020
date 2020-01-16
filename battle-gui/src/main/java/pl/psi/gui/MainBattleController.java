@@ -9,6 +9,7 @@ import javafx.scene.layout.GridPane;
 import pl.psi.battleengine.BattleEngine;
 import pl.psi.battleengine.creatures.CreatureStack;
 import pl.psi.battleengine.creatures.HeroInBattle;
+import pl.psi.factions.AbstractFactionFactory;
 
 import java.awt.Point;
 import java.beans.PropertyChangeEvent;
@@ -26,15 +27,23 @@ public class MainBattleController implements PropertyChangeListener {
 
     public MainBattleController() {
         HeroInBattle h1 = new HeroInBattle();
-        h1.addCreature(CreatureStack.builder().aName("h1_1").aAttack(Range.closed(3,11)).aDefence(5).aMaxHp(20).aMoveRange(7).build());
-        h1.addCreature(CreatureStack.builder().aName("h1_2").aAttack(Range.closed(4,7)).aDefence(3).aMaxHp(20).aMoveRange(3).build());
-        h1.addCreature(CreatureStack.builder().aName("h1_3").aAttack(Range.closed(9,12)).aDefence(2).aMaxHp(20).aMoveRange(5).build());
-        h1.addCreature(CreatureStack.builder().aName("h1_4").aAttack(Range.closed(22,33)).aDefence(11).aMaxHp(20).aMoveRange(11).build());
+
+        AbstractFactionFactory factory = AbstractFactionFactory.getFactory("INFERNO");
+
+        h1.addCreature(new CreatureStack(factory.createByTier(1),1));
+        h1.addCreature(new CreatureStack(factory.createByTier(2),1));
+        h1.addCreature(new CreatureStack(factory.createByTier(3),1));
+        h1.addCreature(new CreatureStack(factory.createByTier(4),1));
+        h1.addCreature(new CreatureStack(factory.createByTier(5),1));
         HeroInBattle h2 = new HeroInBattle();
-        h2.addCreature(CreatureStack.builder().aName("h2_1").aAttack(Range.closed(4,12)).aDefence(0).aMaxHp(20).aMoveRange(9).build());
-        h2.addCreature(CreatureStack.builder().aName("h2_2").aAttack(Range.closed(2,6)).aDefence(1).aMaxHp(20).aMoveRange(4).build());
-        h2.addCreature(CreatureStack.builder().aName("h2_3").aAttack(Range.closed(24,31)).aDefence(14).aMaxHp(20).aMoveRange(8).build());
-        h2.addCreature(CreatureStack.builder().aName("h2_4").aAttack(Range.closed(10,11)).aDefence(7).aMaxHp(20).aMoveRange(2).build());
+
+        factory = AbstractFactionFactory.getFactory("NECROPOLIS");
+        h2.addCreature(new CreatureStack(factory.createByTier(1),1));
+        h2.addCreature(new CreatureStack(factory.createByTier(2),1));
+        h2.addCreature(new CreatureStack(factory.createByTier(3),1));
+        h2.addCreature(new CreatureStack(factory.createByTier(4),1));
+        h2.addCreature(new CreatureStack(factory.createByTier(5),1));
+
         engine = new BattleEngine(h1,h2);
     }
 
