@@ -6,6 +6,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import pl.psi.battleengine.spellbook.Spell;
+import pl.psi.battleengine.spellbook.SpellBuff;
 
 public class SpellList {
 

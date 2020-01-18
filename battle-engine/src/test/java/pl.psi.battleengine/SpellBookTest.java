@@ -4,10 +4,8 @@ import com.google.common.collect.Range;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pl.psi.battleengine.creatures.CreatureStack;
+import pl.psi.battleengine.creatures.StatisticBuffs;
 import pl.psi.battleengine.spellbook.*;
-
-import java.util.Arrays;
-import java.util.LinkedList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -33,8 +31,10 @@ class SpellBookTest {
         assertEquals(2, imp.getAttack().lowerEndpoint());
         assertEquals(10, imp.getAttack().upperEndpoint());
 
-        Spell spell = new AttackBuffSpell("test_attack", 2, 5);
-        spell.buff(imp);
+        StatisticBuffs buff = new StatisticBuffs();
+        buff.setAttack(Range.closed(2,5));
+        Spell spell = new SpellBuff("test_attack", buff);
+        spell.cast(imp);
         assertEquals(4, imp.getAttack().lowerEndpoint());
         assertEquals(15, imp.getAttack().upperEndpoint());
     }
@@ -45,34 +45,9 @@ class SpellBookTest {
         assertEquals(5, imp.getCurrentHp());
 
         Spell spell = new DealDamageSpell("test_damage", 4);
-        spell.buff(imp);
+        spell.cast(imp);
         // after buff
         assertEquals(1, imp.getCurrentHp());
     }
 
-    @Test
-    void ImpShouldHaveCurrentHpDecreasedAndMaHpIncreased(){
-        // before buff
-        assertEquals(5, imp.getMaxHp());
-        assertEquals(5, imp.getCurrentHp());
-
-        Spell spell = new DealDamageAndIncreaseMaxHpSpell("test_damage_and_maxHp", 4, 3);
-        spell.buff(imp);
-        // after buff
-        assertEquals(8, imp.getMaxHp());
-        assertEquals(1, imp.getCurrentHp());
-    }
-
-    @Test
-    void ImpShouldHaveDefenceAndMoveRangeIncreased(){
-        // before buff
-        assertEquals(2, imp.getDefence());
-        assertEquals(0, imp.getMoveRange());
-
-        Spell spell = new DefenceAndMoveRangeBuffSpell("test_defence_and_moveRange", 1, 7);
-        spell.buff(imp);
-        // after buff
-        assertEquals(3, imp.getDefence());
-        assertEquals(7, imp.getMoveRange());
-    }
 }

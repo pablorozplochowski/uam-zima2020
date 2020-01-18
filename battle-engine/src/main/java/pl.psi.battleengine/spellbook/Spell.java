@@ -11,20 +11,12 @@ public abstract class Spell {
 
     @Getter
     private final String name;
-    @Getter
-    protected StatisticBuffs buffs;
+
 
     public Spell(String name) {
-
         this.name = name;
-        buffs = new StatisticBuffs();
-
     }
 
-    public void buff(CreatureStack aTarget){
-
-        aTarget.getSpells().add(this);
-
-    }
+    public abstract void cast(CreatureStack aTarget);
 
 }
