@@ -51,12 +51,20 @@ public class SpellList implements PropertyChangeListener {
         MapTile tile = new MapTile("test");
         spellGrid.add(tile,0,0);
         tile.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-            spellBook.attackSpell.cast((CreatureStack)engine.getByPoint(new Point(0,1)));
+            spellBook.dealDmgSpell.cast((CreatureStack)engine.getByPoint(engine.getActiveCreaturePosition()));
+            engine.pass();
         });
         MapTile tile2 = new MapTile("test2");
         spellGrid.add(tile2,0,1);
+        tile2.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+            spellBook.attackSpell.cast((CreatureStack)engine.getByPoint(engine.getActiveCreaturePosition()));
+            engine.pass();
+        });
         MapTile tile3 = new MapTile("test3");
         spellGrid.add(tile3,0,2);
+        tile3.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+            System.out.println("test3");
+        });
         MapTile tile4 = new MapTile("test4");
         spellGrid.add(tile4,0,3);
 

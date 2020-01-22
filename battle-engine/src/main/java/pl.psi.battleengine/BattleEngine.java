@@ -1,6 +1,7 @@
 package pl.psi.battleengine;
 
 
+import lombok.Getter;
 import pl.psi.battleengine.attackengine.AttackingEngine;
 import pl.psi.battleengine.creatures.CreatureStack;
 import pl.psi.battleengine.creatures.HeroInBattle;
@@ -25,6 +26,7 @@ public class BattleEngine {
     private final Queue<CreatureStack> creaturesQueue;
     private final HeroInBattle hero1;
     private final HeroInBattle hero2;
+    @Getter
     private final Board board;
 
     private final MovingEngine moveEngine;
@@ -116,6 +118,15 @@ public class BattleEngine {
         creatureStacks.sort(Comparator.comparingInt(CreatureStack::getMoveRange).reversed());
         creaturesQueue.addAll(creatureStacks);
         nextCreature();
+    }
+
+    public LinkedList<CreatureStack> gimmeCreatureStacks(){
+
+        LinkedList<CreatureStack> ret = new LinkedList<CreatureStack>();
+        ret.addAll(hero1.getCreatureStacks());
+        ret.addAll(hero2.getCreatureStacks());
+        return ret;
+
     }
 
     private void initBoard() {
