@@ -37,7 +37,9 @@ public class CreatureStack implements GuiTileIf {
 
     public void attack(CreatureStack aDefender) {
         dealDamage(aDefender);
-        aDefender.counterAttack(this);
+        if(aDefender.getCurrentHp()>0) {
+            aDefender.counterAttack(this);
+        }
     }
 
     private void counterAttack(CreatureStack aDefender){
