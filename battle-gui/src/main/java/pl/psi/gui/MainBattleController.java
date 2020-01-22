@@ -3,9 +3,13 @@ package pl.psi.gui;
 import com.google.common.collect.Range;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 import pl.psi.battleengine.BattleEngine;
 import pl.psi.battleengine.creatures.CreatureStack;
 import pl.psi.battleengine.creatures.HeroInBattle;
@@ -13,6 +17,7 @@ import pl.psi.battleengine.creatures.HeroInBattle;
 import java.awt.Point;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.IOException;
 
 public class MainBattleController implements PropertyChangeListener {
 
@@ -36,6 +41,32 @@ public class MainBattleController implements PropertyChangeListener {
         h2.addCreature(CreatureStack.builder().aName("h2_3").aAttack(Range.closed(24,31)).aDefence(14).aMaxHp(20).aMoveRange(8).build());
         h2.addCreature(CreatureStack.builder().aName("h2_4").aAttack(Range.closed(10,11)).aDefence(7).aMaxHp(20).aMoveRange(2).build());
         engine = new BattleEngine(h1,h2);
+
+        windowPlease(engine);
+
+    }
+
+    private void windowPlease(BattleEngine engine){
+
+        try {
+            // Fragment poradnika "How to jafa" dla Lukasza S
+            Stage stage = new Stage(); // Tworzymy nowego Stage'a - stage to okno
+            FXMLLoader spells = new FXMLLoader(getClass().getClassLoader().getResource("SpellWindow.fxml")); // Ladujemy plik XML
+            Parent root = spells.load(); // Inicjujemy - w tym miejscu wykonuje sie konstruktor klasy SpellList
+            SpellList controller = spells.getController(); // Pobieramy cala instancje klasy SpellList - to powinno sie stac po wykonaniu spells.load() - inaczej dostaniemy NULL'a
+            Scene spell_window = new Scene(root); // Tworzymy nowa "scene" - scena to zawartosc okna
+            controller.setEngine(engine); // Wywolujemy metode klasy SpellList - kontrolera sceny
+            stage.setScene(spell_window); // wstawiamy scene (zawartosc okna) do stage'a (do okna)
+            stage.setTitle("Spells");
+            stage.setX(0 + 10);
+            stage.setY(0);
+            stage.show();
+
+        }
+        catch (IOException aE) {
+            aE.printStackTrace();
+        }
+
     }
 
     @FXML
